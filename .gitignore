@@ -1,0 +1,10 @@
+target/
+
+.idea/
+*.iws
+*.iml
+*.ipr
+*.log
+*.db
+../node_modules/
+node_modules

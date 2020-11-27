@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_FILE" value="rest"/>
+    <property name="LOG_PATTERN" value="%highlight %date{dd.MM HH:mm:ss.SSS} [%X{user}][%X{sessId}][%thread][%-5level] %logger{36}: %msg%n%rEx"/>
+
+    <appender name="sout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="rfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>72</maxHistory>
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="springfox" level="WARN"/>
+    <logger name="com.zaxxer" level="WARN"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="sout"/>
+    </root>
+</configuration>

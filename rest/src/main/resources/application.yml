@@ -1,0 +1,17 @@
+server:
+  port: 9000
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  datasource:
+    username: sa
+    type: com.zaxxer.hikari.HikariDataSource
+    password:
+#    url: jdbc:h2:file:./db;INIT=RUNSCRIPT FROM 'classpath:init.sql'
+    url: jdbc:h2:mem:db;INIT=RUNSCRIPT FROM 'classpath:init.sql'
