@@ -14,77 +14,77 @@ insert into position(id, code) values (7, 'Батрак');
 create table user (
         id BIGINT primary key auto_increment,
         name VARCHAR(100) not null,
-        position BIGINT,
+        position_id BIGINT,
         type NUMBER default 0
 );
-insert into user (id, name, position) values (0, 'Андрей Геннадьевич', 0);
-insert into user (id, name, position) values (1, 'Абрам Альбертович', 0);
+insert into user (id, name, position_id) values (0, 'Андрей Геннадьевич', 0);
+insert into user (id, name, position_id) values (1, 'Абрам Альбертович', 0);
 
-insert into user (id, name, position) values (10, 'Петрович', 1);
-insert into user (id, name, position) values (11, 'Иваныч', 1);
-insert into user (id, name, position) values (12, 'Георгич', 1);
-insert into user (id, name, position) values (13, 'Палыч', 1);
-insert into user (id, name, position) values (14, 'Петровна', 1);
-insert into user (id, name, position) values (15, 'Львовна', 1);
-insert into user (id, name, position) values (16, 'Ильинична', 1);
-insert into user (id, name, position) values (17, 'Петровна', 1);
-insert into user (id, name, position) values (18, 'Санна', 1);
-insert into user (id, name, position) values (19, 'Батьковна', 1);
+insert into user (id, name, position_id) values (10, 'Петрович', 1);
+insert into user (id, name, position_id) values (11, 'Иваныч', 1);
+insert into user (id, name, position_id) values (12, 'Георгич', 1);
+insert into user (id, name, position_id) values (13, 'Палыч', 1);
+insert into user (id, name, position_id) values (14, 'Петровна', 1);
+insert into user (id, name, position_id) values (15, 'Львовна', 1);
+insert into user (id, name, position_id) values (16, 'Ильинична', 1);
+insert into user (id, name, position_id) values (17, 'Петровна', 1);
+insert into user (id, name, position_id) values (18, 'Санна', 1);
+insert into user (id, name, position_id) values (19, 'Батьковна', 1);
 
-insert into user (id, name, position) values (100, 'Работяга 100', 7);
-insert into user (id, name, position) values (101, 'Работяга 101', 7);
-insert into user (id, name, position) values (102, 'Работяга 102', 7);
-insert into user (id, name, position) values (103, 'Работяга 103', 7);
-insert into user (id, name, position) values (104, 'Работяга 104', 7);
-insert into user (id, name, position) values (105, 'Работяга 105', 7);
-insert into user (id, name, position) values (106, 'Работяга 106', 7);
-insert into user (id, name, position) values (107, 'Работяга 107', 7);
-insert into user (id, name, position) values (108, 'Работяга 108', 7);
-insert into user (id, name, position) values (109, 'Работяга 109', 7);
+insert into user (id, name, position_id) values (100, 'Работяга 100', 7);
+insert into user (id, name, position_id) values (101, 'Работяга 101', 7);
+insert into user (id, name, position_id) values (102, 'Работяга 102', 7);
+insert into user (id, name, position_id) values (103, 'Работяга 103', 7);
+insert into user (id, name, position_id) values (104, 'Работяга 104', 7);
+insert into user (id, name, position_id) values (105, 'Работяга 105', 7);
+insert into user (id, name, position_id) values (106, 'Работяга 106', 7);
+insert into user (id, name, position_id) values (107, 'Работяга 107', 7);
+insert into user (id, name, position_id) values (108, 'Работяга 108', 7);
+insert into user (id, name, position_id) values (109, 'Работяга 109', 7);
 
-insert into user (id, name, position) values (110, 'Работяга 110', 7);
-insert into user (id, name, position) values (111, 'Работяга 111', 7);
-insert into user (id, name, position) values (112, 'Работяга 112', 7);
-insert into user (id, name, position) values (113, 'Работяга 113', 7);
-insert into user (id, name, position) values (114, 'Работяга 114', 7);
-insert into user (id, name, position) values (115, 'Работяга 115', 7);
-insert into user (id, name, position) values (116, 'Работяга 116', 7);
-insert into user (id, name, position) values (117, 'Работяга 117', 7);
-insert into user (id, name, position) values (118, 'Работяга 118', 7);
-insert into user (id, name, position) values (119, 'Работяга 119', 7);
+insert into user (id, name, position_id) values (110, 'Работяга 110', 7);
+insert into user (id, name, position_id) values (111, 'Работяга 111', 7);
+insert into user (id, name, position_id) values (112, 'Работяга 112', 7);
+insert into user (id, name, position_id) values (113, 'Работяга 113', 7);
+insert into user (id, name, position_id) values (114, 'Работяга 114', 7);
+insert into user (id, name, position_id) values (115, 'Работяга 115', 7);
+insert into user (id, name, position_id) values (116, 'Работяга 116', 7);
+insert into user (id, name, position_id) values (117, 'Работяга 117', 7);
+insert into user (id, name, position_id) values (118, 'Работяга 118', 7);
+insert into user (id, name, position_id) values (119, 'Работяга 119', 7);
 
-insert into user (id, name, position) values (120, 'Работяга 120', 7);
-insert into user (id, name, position) values (121, 'Работяга 121', 7);
-insert into user (id, name, position) values (122, 'Работяга 122', 7);
-insert into user (id, name, position) values (123, 'Работяга 123', 7);
-insert into user (id, name, position) values (124, 'Работяга 124', 7);
-insert into user (id, name, position) values (125, 'Работяга 125', 7);
-insert into user (id, name, position) values (126, 'Работяга 126', 7);
-insert into user (id, name, position) values (127, 'Работяга 127', 7);
-insert into user (id, name, position) values (128, 'Работяга 128', 7);
-insert into user (id, name, position) values (129, 'Работяга 129', 7);
+insert into user (id, name, position_id) values (120, 'Работяга 120', 7);
+insert into user (id, name, position_id) values (121, 'Работяга 121', 7);
+insert into user (id, name, position_id) values (122, 'Работяга 122', 7);
+insert into user (id, name, position_id) values (123, 'Работяга 123', 7);
+insert into user (id, name, position_id) values (124, 'Работяга 124', 7);
+insert into user (id, name, position_id) values (125, 'Работяга 125', 7);
+insert into user (id, name, position_id) values (126, 'Работяга 126', 7);
+insert into user (id, name, position_id) values (127, 'Работяга 127', 7);
+insert into user (id, name, position_id) values (128, 'Работяга 128', 7);
+insert into user (id, name, position_id) values (129, 'Работяга 129', 7);
 
-insert into user (id, name, position) values (130, 'Работяга 130', 7);
-insert into user (id, name, position) values (131, 'Работяга 131', 7);
-insert into user (id, name, position) values (132, 'Работяга 132', 7);
-insert into user (id, name, position) values (133, 'Работяга 133', 7);
-insert into user (id, name, position) values (134, 'Работяга 134', 7);
-insert into user (id, name, position) values (135, 'Работяга 135', 7);
-insert into user (id, name, position) values (136, 'Работяга 136', 7);
-insert into user (id, name, position) values (137, 'Работяга 137', 7);
-insert into user (id, name, position) values (138, 'Работяга 138', 7);
-insert into user (id, name, position) values (139, 'Работяга 139', 7);
+insert into user (id, name, position_id) values (130, 'Работяга 130', 7);
+insert into user (id, name, position_id) values (131, 'Работяга 131', 7);
+insert into user (id, name, position_id) values (132, 'Работяга 132', 7);
+insert into user (id, name, position_id) values (133, 'Работяга 133', 7);
+insert into user (id, name, position_id) values (134, 'Работяга 134', 7);
+insert into user (id, name, position_id) values (135, 'Работяга 135', 7);
+insert into user (id, name, position_id) values (136, 'Работяга 136', 7);
+insert into user (id, name, position_id) values (137, 'Работяга 137', 7);
+insert into user (id, name, position_id) values (138, 'Работяга 138', 7);
+insert into user (id, name, position_id) values (139, 'Работяга 139', 7);
 
-insert into user (id, name, position) values (140, 'Работяга 140', 7);
-insert into user (id, name, position) values (141, 'Работяга 141', 7);
-insert into user (id, name, position) values (142, 'Работяга 142', 7);
-insert into user (id, name, position) values (143, 'Работяга 143', 7);
-insert into user (id, name, position) values (144, 'Работяга 144', 7);
-insert into user (id, name, position) values (145, 'Работяга 145', 7);
-insert into user (id, name, position) values (146, 'Работяга 146', 7);
-insert into user (id, name, position) values (147, 'Работяга 147', 7);
-insert into user (id, name, position) values (148, 'Работяга 148', 7);
-insert into user (id, name, position) values (149, 'Работяга 149', 7);
+insert into user (id, name, position_id) values (140, 'Работяга 140', 7);
+insert into user (id, name, position_id) values (141, 'Работяга 141', 7);
+insert into user (id, name, position_id) values (142, 'Работяга 142', 7);
+insert into user (id, name, position_id) values (143, 'Работяга 143', 7);
+insert into user (id, name, position_id) values (144, 'Работяга 144', 7);
+insert into user (id, name, position_id) values (145, 'Работяга 145', 7);
+insert into user (id, name, position_id) values (146, 'Работяга 146', 7);
+insert into user (id, name, position_id) values (147, 'Работяга 147', 7);
+insert into user (id, name, position_id) values (148, 'Работяга 148', 7);
+insert into user (id, name, position_id) values (149, 'Работяга 149', 7);
 
 insert into user (id, name, type) values (20, 'Мастера цеха 0', 1);
 insert into user (id, name, type) values (21, 'Мастера цеха 1', 1);
@@ -174,19 +174,30 @@ insert into DepartmentHousing(department_id, housing_id) values (4, 8);
 insert into DepartmentHousing(department_id, housing_id) values (4, 9);
 insert into DepartmentHousing(department_id, housing_id) values (4, 11);
 
+create table priority (
+    id BIGINT primary key auto_increment,
+    code VARCHAR(100)
+);
+insert into priority(id, code) values (0, 'УРГЕНТ!!!');
+insert into priority(id, code) values (1, 'Срочно');
+insert into priority(id, code) values (2, 'Обычно');
+insert into priority(id, code) values (3, 'Не срочно');
+insert into priority(id, code) values (4, 'На расслабоне');
+insert into priority(id, code) values (5, 'Можно не делать');
+
 create table Task (
     id BIGINT primary key auto_increment,
     type BIGINT not null,
-    assignee BIGINT,
+    assignee_id BIGINT,
     dateTo TIMESTAMP,
     dateFact TIMESTAMP,
     tstmpCreate TIMESTAMP default CURRENT_TIMESTAMP,
-    author BIGINT,
+    author_id BIGINT,
     header VARCHAR(250),
     info VARCHAR(2500),
     status BIGINT DEFAULT 0,
-    priority BIGINT default 3,
+    priority_id BIGINT default 2,
     parent_id BIGINT
 );
-insert into Task (type, assignee, dateTo, dateFact, author, header, info) values (
+insert into Task (type, assignee_id, dateTo, dateFact, author_id, header, info) values (
 0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт');
