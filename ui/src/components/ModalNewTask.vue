@@ -1,31 +1,35 @@
 <template>
     <div class="app-modal-new">
         <a-button
-                type="primary"
-                icon="plus"
-                class="app-filter__button"
-                size="small"
-                @click="showModal"
-                style="margin-bottom: 5px"
+            type="primary"
+            icon="plus"
+            class="app-filter__button"
+            size="small"
+            @click="showModal"
+            style="margin-bottom: 5px"
         >
             Создать вложенную задачу
         </a-button>
         <a-modal
-                title="Создание задачи"
-                :visible="visible"
-                @ok="handleOk"
-                @cancel="handleCancel"
-                okText="Создать"
-                cancelText="Отменить"
-                class="app-modal-create"
+            title="Создание задачи"
+            :visible="visible"
+            @ok="handleOk"
+            @cancel="handleCancel"
+            okText="Создать"
+            cancelText="Отменить"
+            class="app-modal-create"
         >
             <ModalContent />
         </a-modal>
         <NewTask
-                v-for="card in this.cardBlock"
-                :cardTitle="card.title"
-                :key="card.title"
-                :getNewTask="getNewTask"
+            v-for="task in this.subTaskList"
+            :cardTitle="task.header"
+            :newAssignee="task.assignee.name"
+            :tstmpCreate="task.tstmpCreate"
+            :newTaskStatus="task.status.code"
+            :key="task.id"
+            :getNewTask="getNewTask"
+            :subTaskList="subTaskList"
         />
     </div>
 </template>
@@ -36,7 +40,10 @@
 
     export default {
         name: "ModalNewTask",
-        props: [ 'getNewTask' ],
+        props: [
+            'getNewTask',
+            'subTaskList'
+        ],
         components: {
             ModalContent,
             NewTask
@@ -44,20 +51,6 @@
         data() {
             return {
                 visible: false,
-                cardBlock: [
-                    {
-                        title: 'Выставить верное значение для определения давления в баках',
-                        taskType: 'Технологическое'
-                    },
-                    {
-                        title: 'Выставить верное значение для определения давления в баках2',
-                        taskType: 'Технологическое'
-                    },
-                    {
-                        title: 'Выставить верное значение для определения давления в баках3',
-                        taskType: 'Технологическое'
-                    }
-                ],
             };
         },
         methods: {

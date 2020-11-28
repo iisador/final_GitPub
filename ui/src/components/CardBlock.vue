@@ -14,6 +14,7 @@
             :taskAssigneePosition="task.assignee.position.code"
             :taskDateTo="task.dateTo"
             :modalTaskText="task.info"
+            :subTaskList="task.subTaskList"
             :key="task.id"
         />
     </div>

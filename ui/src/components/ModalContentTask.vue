@@ -33,6 +33,7 @@
 
         <ModalTabs
             :getNewTask="getNewTask"
+            :subTaskList="subTaskList"
             v-if="!clickNewTask"
         />
         <ModalNewTaskTab v-if="clickNewTask" />
@@ -65,7 +66,8 @@
             'taskModalPriority',
             'taskAssigneePosition',
             'taskDateTo',
-            'modalTaskText'
+            'modalTaskText',
+            'subTaskList'
         ],
         data() {
             return {

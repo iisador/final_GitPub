@@ -5,7 +5,10 @@
                 <ModalTaskComment />
             </a-tab-pane>
             <a-tab-pane key="2" tab="Вложенные задачи" force-render>
-                <ModalNewTask :getNewTask="getNewTask"/>
+                <ModalNewTask
+                    :getNewTask="getNewTask"
+                    :subTaskList="subTaskList"
+                />
             </a-tab-pane>
         </a-tabs>
     </div>
@@ -17,7 +20,10 @@
 
     export default {
         name: "ModalTabs",
-        props: [ 'getNewTask' ],
+        props: [
+            'getNewTask',
+            'subTaskList'
+        ],
         components: {
             ModalTaskComment,
             ModalNewTask
