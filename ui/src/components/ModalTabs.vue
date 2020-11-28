@@ -1,0 +1,30 @@
+<template>
+    <div>
+        <a-tabs default-active-key="1">
+            <a-tab-pane key="1" tab="Комментарии">
+                <ModalTaskComment />
+            </a-tab-pane>
+            <a-tab-pane key="2" tab="Вложенные задачи" force-render>
+                <ModalNewTask :getNewTask="getNewTask"/>
+            </a-tab-pane>
+        </a-tabs>
+    </div>
+</template>
+
+<script>
+    import ModalTaskComment from './ModalTaskComment'
+    import ModalNewTask from './ModalNewTask'
+
+    export default {
+        name: "ModalTabs",
+        props: [ 'getNewTask' ],
+        components: {
+            ModalTaskComment,
+            ModalNewTask
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

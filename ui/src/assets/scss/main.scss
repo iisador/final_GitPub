@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  padding: 30px 60px;
+
+  &-block {
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+      width: 25%;
+    }
+
+    &-right {
+      width: 100%;
+      margin-left: 28px;
+    }
+
+    &__title {
+      font-family: SF Pro Display, serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      color: #212121;
+      margin-bottom: 0;
+      cursor: pointer;
+
+      &-descr {
+        font-family: SF Pro Display;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: rgba(33, 33, 33, 0.5);
+      }
+    }
+  }
+
+  &-widgets {
+    margin-bottom: 24px;
+  }
+
+  &-card {
+    .ant-card-body::before, .ant-card-body::after {
+      display: none;
+    }
+    .ant-card-body {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+
+      .ant-tag {
+        margin-right: 10px !important;
+      }
+    }
+  }
+
+  &-time {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    span {
+      font-family: SF Pro Display;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      color: rgba(33, 33, 33, 0.8);
+    }
+  }
+
+  &-filter {
+    display: flex;
+    margin-bottom: 28px;
+    align-items: center;
+
+    &__input {
+      background: #F2F2F2 !important;
+      border-radius: 8px !important;
+      padding: 16px 20px !important;
+    }
+
+    &__button {
+      font-family: SF Pro Display;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      background-color: #27AE60 !important;
+      border-radius: 4px !important;
+      margin-left: 20px;
+      padding: 2px 16px !important;
+    }
+  }
+
+  &-modal-create {
+    .ant-modal-header {
+      border-bottom: none;
+    }
+
+    .ant-modal-footer {
+      border-top: none;
+
+      div {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
+        .ant-btn-primary {
+          font-family: SF Pro Display;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 16px;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          background-color: #27AE60 !important;
+          border-radius: 4px !important;
+          padding: 2px 16px !important;
+        }
+      }
+    }
+  }
+
+  &-modal-task {
+    .ant-modal {
+      width: 80% !important;
+    }
+
+    .ant-modal-body {
+      padding-top: 0;
+
+      .ant-tag {
+        margin: 0 10px 0 0!important;
+      }
+    }
+
+    .ant-modal-footer {
+      div {
+        .ant-btn-primary {
+          background-color: #2F80ED !important;
+        }
+      }
+    }
+
+    &__top {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    &__time {
+      margin-right: 10px;
+    }
+
+    .ant-card {
+      border: none !important;
+
+      .ant-card-body::before, .ant-card-body::after {
+        display: none;
+      }
+
+      &-body {
+        display: flex;
+        flex-direction: column;
+        padding: 0 !important;
+      }
+    }
+
+    &__info-title {
+      font-weight: bold;
+    }
+
+    &-text {
+      margin-top: 10px;
+    }
+
+    &__photo {
+      margin: 10px 5px 0 0;
+    }
+
+    &-buttons {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        font-family: SF Pro Display;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 16px;
+        text-transform: uppercase;
+      }
+
+      &__edit {
+        margin-right: 5px !important;
+        background: rgba(47, 128, 237, 0.1) !important;
+        border-radius: 4px !important;
+        color: #2F80ED !important;
+      }
+
+      &__cancel {
+        background: rgba(79, 79, 79, 0.1) !important;
+        border-radius: 4px !important;
+        color: #4F4F4F !important;
+      }
+    }
+
+    &-comment {
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      border: 1px solid #E0E0E0;
+      box-sizing: border-box;
+      border-radius: 8px;
+      padding: 12px 16px;
+
+      .ant-card-body {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      &__text {
+        margin: 10px 0;
+      }
+    }
+
+    &-back {
+      font-family: SF Pro Display;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: uppercase;
+      color: #2F80ED;
+      cursor: pointer;
+    }
+  }
+
+  &-modal-new {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &-task {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      padding: 20px;
+      border: 1px solid #E0E0E0;
+      box-sizing: border-box;
+      border-radius: 8px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &-modal-content {
+    position: relative;
+    margin-bottom: 24px;
+
+    &__micro {
+      position: absolute;
+      width: 15px;
+      right: 15px;
+      top: 18px;
+    }
+
+    &__input {
+      padding-top: 24px !important;
+      padding-bottom: 24px !important;
+    }
+  }
+}
+
+.ant {
+  &-tag {
+    margin-top: 5px !important;
+  }
+}
+
+.ant-card {
+  border: 1px solid #E0E0E0;
+  box-sizing: border-box;
+  border-radius: 8px;
+
+  &-body {
+    padding: 22px 20px;
+  }
+}
