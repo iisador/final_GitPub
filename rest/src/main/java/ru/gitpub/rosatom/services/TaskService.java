@@ -3,6 +3,7 @@ package ru.gitpub.rosatom.services;
 import org.springframework.stereotype.Service;
 import ru.gitpub.rosatom.domain.entities.Comment;
 import ru.gitpub.rosatom.domain.entities.Reaction;
+import ru.gitpub.rosatom.domain.entities.StatusType;
 import ru.gitpub.rosatom.domain.entities.Task;
 import ru.gitpub.rosatom.domain.repos.CommentRepository;
 import ru.gitpub.rosatom.domain.repos.PriorityRepository;
@@ -32,6 +33,7 @@ public class TaskService {
     private final CommentRepository commentRepository;
 
     private final TaskTypeRepository taskTypeRepository;
+
     private final ReactionRepository reactionRepository;
 
     public TaskService(TaskRepository taskRepository,
@@ -105,5 +107,51 @@ public class TaskService {
                     task.setReaction(r);
                     return taskRepository.save(task);
                 });
+    }
+
+    public void status(Long taskId, Long statusId) {
+        StatusType s = statusTypeRepository.findById(statusId)
+                .orElseThrow(() -> new RuntimeException(("Статус с ид " + statusId + " не найден")));
+
+        taskRepository.findById(taskId)
+                .map(task -> {
+                    task.setStatus(s);
+                    return taskRepository.save(task);
+                });
+    }
+
+    public void update(Long taskId, TaskResource res) {
+        taskRepository.findById(taskId)
+                .map(task -> {
+                    if (res.getAssignee() != null) {
+                        task.setAssignee(userRepository.findById(res.getAssignee())
+                                .orElseThrow(() -> new RuntimeException("Пользователь с ид " + res.getAssignee() + " не найден")));
+                    }
+                    if (res.getHeader() != null) {
+                        task.setHeader(res.getHeader());
+                    }
+
+                    if (res.getInfo() != null) {
+                        task.setInfo(res.getInfo());
+                    }
+
+                    if (res.getDateTo() != null) {
+                        task.setDateTo(res.getDateTo());
+                    }
+
+                    if (res.getDateFact() != null) {
+                        task.setDateFact(res.getDateFact());
+                    }
+
+                    if (res.getType() != null) {
+                        task.setType(taskTypeRepository.findById(res.getType())
+                                .orElseThrow(() -> new RuntimeException("Тип задачи с ид " + res.getType() + " не найден")));
+                    }
+
+                    res.getPriority().ifPresent(id -> task.setPriority(priorityRepository.findById(id)
+                            .orElseThrow(() -> new RuntimeException("Приоритет с ид " + id + " не найден"))));
+                    return taskRepository.save(task);
+                })
+                .orElseThrow(() -> new RuntimeException("Задача с ид " + taskId + " не найдена"));
     }
 }
