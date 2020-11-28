@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.gitpub.rosatom.domain.repos.TaskFilter;
 import ru.gitpub.rosatom.domain.repos.TaskRepository;
 import ru.gitpub.rosatom.rest.controllers.models.TaskModel;
+import ru.gitpub.rosatom.rest.controllers.resources.CommentResource;
 import ru.gitpub.rosatom.rest.controllers.resources.TaskResource;
 import ru.gitpub.rosatom.services.TaskService;
 
@@ -75,6 +76,21 @@ public class TaskController {
                 .map(e -> conversionService.convert(e, TaskModel.class));
     }
 
+    @Operation(summary = "Конкретная задача",
+            tags = {"Задача"},
+            description = "Возвращает задачу",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Задача",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = TaskModel.class))))})
+    @GetMapping(value = "/api/tasks/{taskId}", produces = APPLICATION_JSON_VALUE)
+    public TaskModel get(
+            @Parameter(description = "Ид задачи", example = "1")
+            @PathVariable Long taskId) {
+        return taskRepository.findById(taskId)
+                .map(e -> conversionService.convert(e, TaskModel.class))
+                .orElseThrow(() -> new RuntimeException("Задача с ид " + taskId + " не найдена"));
+    }
+
     @Operation(summary = "Создание задачи",
             tags = {"Задача"},
             description = "Создание задачи или подзадачи",
@@ -93,9 +109,26 @@ public class TaskController {
                     @ApiResponse(responseCode = "200", description = "Ид новое задачи, если все ок",
                             content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
     @PostMapping(value = "/api/tasks/{taskId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Long> createSubTask(@PathVariable Long taskId,
-            @RequestBody TaskResource task) {
+    public ResponseEntity<Long> createSubTask(
+            @PathVariable
+            @Parameter(description = "Ид задачи", example = "1")
+                    Long taskId,
+
+            @RequestBody
+                    TaskResource task) {
         task.setParent(taskId);
         return ResponseEntity.ok(taskService.create(task));
+    }
+
+    @Operation(summary = "Добавить комментарий к задаче",
+            tags = {"Задача"},
+            description = "Комментирование",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Ид коммента, если все ок",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
+    @PostMapping(value = "/api/tasks/{taskId}/comments", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Long> comment(@PathVariable Long taskId,
+            @RequestBody CommentResource commentResource) {
+        return ResponseEntity.ok(taskService.comment(taskId, commentResource));
     }
 }

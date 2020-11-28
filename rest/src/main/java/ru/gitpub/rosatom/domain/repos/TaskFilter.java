@@ -15,25 +15,25 @@ import ru.gitpub.rosatom.domain.entities.Task;
 @Builder(setterPrefix = "with")
 public class TaskFilter implements Specification<Task> {
 
-    private Long type;
+    private final Long type;
 
-    private Long assigneeId;
+    private final Long assigneeId;
 
-    private LocalDateTime dateTo;
+    private final LocalDateTime dateTo;
 
-    private LocalDateTime dateFact;
+    private final LocalDateTime dateFact;
 
-    private LocalDateTime tstmpCreate;
+    private final LocalDateTime tstmpCreate;
 
-    private Long authorId;
+    private final Long authorId;
 
-    private String header;
+    private final String header;
 
-    private String info;
+    private final String info;
 
-    private Long statusId;
+    private final Long statusId;
 
-    private Long priorityId;
+    private final Long priorityId;
 
     @Override
     public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
@@ -42,7 +42,7 @@ public class TaskFilter implements Specification<Task> {
         predicates.add(criteriaBuilder.isNull(root.get("parentId")));
 
         if (type != null) {
-            predicates.add(criteriaBuilder.equal(root.get("type"), type));
+            predicates.add(criteriaBuilder.equal(root.get("type").get("id"), type));
         }
 
         if (assigneeId != null) {

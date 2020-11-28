@@ -20,7 +20,7 @@ public class TaskModel implements Serializable {
     private Long id;
 
     @ApiModelProperty("Тип задачи")
-    private Long type;
+    private TaskTypeModel type;
 
     @ApiModelProperty("Исполнитель")
     private UserModel assignee;
@@ -51,4 +51,6 @@ public class TaskModel implements Serializable {
 
     @ApiModelProperty("Подзадачи")
     private List<TaskModel> subTaskList;
+
+    private List<CommentModel> comments;
 }
