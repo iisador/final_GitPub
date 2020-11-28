@@ -4,8 +4,17 @@
             v-for="(task, index) in getTasks"
             :cardTitle="task.header"
             :tstmpCreate="task.tstmpCreate"
+            :tstmpModalCreate="task.tstmpCreate"
+            :taskType="task.type.code"
             :taskPriority="task.priority.code"
             :taskStatus="task.status.code"
+            :taskModalStatus="task.status.code"
+            :taskModalPriority="task.priority.code"
+            :taskAssignee="task.assignee.name"
+            :taskAssigneePosition="task.assignee.position.code"
+            :taskDateTo="task.dateTo"
+            :modalTaskText="task.info"
+            :key="task.id"
         />
     </div>
 </template>
@@ -22,7 +31,6 @@
         mounted() {
             this.$store.dispatch('GET_TASKS');
             this.$store.dispatch('GET_TASKS_TYPE');
-            console.log(this.getTasks)
         },
         computed: {
             ...mapState(['tasks', 'taskTypes']),

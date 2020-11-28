@@ -2,19 +2,19 @@
     <div style="display: flex; justify-content: space-between; margin-top: 5px">
         <a-card>
             <span>Исполнитель</span>
-            <span class="app-modal-task__info-title">Иванов Петр Иванович</span>
+            <span class="app-modal-task__info-title">{{ taskAssignee }}</span>
         </a-card>
         <a-card>
             <span>Важность</span>
-            <span class="app-modal-task__info-title">Очень срочно</span>
+            <span class="app-modal-task__info-title">{{ taskModalPriority }}</span>
         </a-card>
         <a-card>
             <span>Вид деятельности</span>
-            <span class="app-modal-task__info-title">Общая</span>
+            <span class="app-modal-task__info-title">{{ taskAssigneePosition }}</span>
         </a-card>
         <a-card>
             <span>Срок выполнения</span>
-            <span class="app-modal-task__info-title">30 Ноя 2020</span>
+            <span class="app-modal-task__info-title">{{ taskDateTo }}</span>
         </a-card>
         <a-card>
             <span>Реакция</span>
@@ -25,7 +25,13 @@
 
 <script>
     export default {
-        name: "ModalTaskAddresse"
+        name: "ModalTaskAddresse",
+        props: [
+            'taskAssignee',
+            'taskModalPriority',
+            'taskAssigneePosition',
+            'taskDateTo'
+        ]
     }
 </script>
 

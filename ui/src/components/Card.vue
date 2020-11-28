@@ -30,6 +30,13 @@
             >
                 <ModalContentTask
                     :taskType="taskType"
+                    :taskModalStatus="taskModalStatus"
+                    :tstmpModalCreate="tstmpModalCreate"
+                    :taskAssignee="taskAssignee"
+                    :taskModalPriority="taskModalPriority"
+                    :taskAssigneePosition="taskAssigneePosition"
+                    :taskDateTo="taskDateTo"
+                    :modalTaskText="modalTaskText"
                 />
             </a-modal>
         </a-card>
@@ -52,7 +59,14 @@
             'taskType',
             'tstmpCreate',
             'taskPriority',
-            'taskStatus'
+            'taskStatus',
+            'taskModalStatus',
+            'tstmpModalCreate',
+            'taskAssignee',
+            'taskModalPriority',
+            'taskAssigneePosition',
+            'taskDateTo',
+            'modalTaskText'
         ],
         data() {
             return {

@@ -10,9 +10,18 @@
         </div>
         <ModalTaskTop
             :taskType="taskType"
+            :taskModalStatus="taskModalStatus"
+            :tstmpModalCreate="tstmpModalCreate"
         />
-        <ModalTaskAddresse />
-        <ModalTaskText />
+        <ModalTaskAddresse
+            :taskAssignee="taskAssignee"
+            :taskModalPriority="taskModalPriority"
+            :taskAssigneePosition="taskAssigneePosition"
+            :taskDateTo="taskDateTo"
+        />
+        <ModalTaskText
+            :modalTaskText="modalTaskText"
+        />
         <ModalTaskPhoto />
 
         <div class="app-modal-task-buttons">
@@ -48,7 +57,16 @@
             ModalTabs,
             ModalNewTaskTab,
         },
-        props: [ 'taskType' ],
+        props: [
+            'taskType',
+            'taskModalStatus',
+            'tstmpModalCreate',
+            'taskAssignee',
+            'taskModalPriority',
+            'taskAssigneePosition',
+            'taskDateTo',
+            'modalTaskText'
+        ],
         data() {
             return {
                 clickNewTask: false
