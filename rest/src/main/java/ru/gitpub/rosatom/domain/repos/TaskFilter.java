@@ -35,6 +35,8 @@ public class TaskFilter implements Specification<Task> {
 
     private final Long priorityId;
 
+    private final Long groupId;
+
     @Override
     public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
@@ -55,6 +57,10 @@ public class TaskFilter implements Specification<Task> {
 
         if (statusId != null) {
             predicates.add(criteriaBuilder.equal(root.get("status").get("id"), statusId));
+        }
+
+        if (groupId != null) {
+            predicates.add(criteriaBuilder.equal(root.get("group").get("id"), groupId));
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

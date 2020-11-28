@@ -65,12 +65,16 @@ public class TaskController {
             @RequestParam(required = false)
             @Parameter(description = "Фильтр по автору задачи", example = "0")
                     Long authorId,
+            @RequestParam(required = false)
+            @Parameter(description = "Фильтр по группе", example = "0")
+                    Long groupId,
             Pageable pageable) {
         TaskFilter filter = TaskFilter.builder()
                 .withType(typeId)
                 .withStatusId(statusId)
                 .withAssigneeId(assigneeId)
                 .withAuthorId(authorId)
+                .withGroupId(groupId)
                 .build();
         return taskRepository.findAll(filter, pageable)
                 .map(e -> conversionService.convert(e, TaskModel.class));
@@ -127,8 +131,33 @@ public class TaskController {
                     @ApiResponse(responseCode = "200", description = "Ид коммента, если все ок",
                             content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
     @PostMapping(value = "/api/tasks/{taskId}/comments", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Long> comment(@PathVariable Long taskId,
-            @RequestBody CommentResource commentResource) {
+    public ResponseEntity<Long> comment(
+            @Parameter(description = "Ид задачи", example = "1")
+            @PathVariable
+                    Long taskId,
+
+            @Parameter(description = "Ресурс комментария")
+            @RequestBody
+                    CommentResource commentResource) {
         return ResponseEntity.ok(taskService.comment(taskId, commentResource));
+    }
+
+    @Operation(summary = "Добавить реакцию к задаче",
+            tags = {"Задача"},
+            description = "Добавление реакции",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "ок не ок",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
+    @PostMapping(value = "/api/tasks/{taskId}/reaction", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> comment(
+            @Parameter(description = "Ид задачи", example = "1")
+            @PathVariable
+                    Long taskId,
+
+            @Parameter(description = "Ид реакции", example = "1")
+            @RequestParam
+                    Long reactionId) {
+        taskService.reaction(taskId, reactionId);
+        return ResponseEntity.ok("OK");
     }
 }

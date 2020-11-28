@@ -19,11 +19,17 @@ public class TaskModel implements Serializable {
     @ApiModelProperty("Ид")
     private Long id;
 
+    @ApiModelProperty("Группа задачи")
+    private GroupModel group;
+
     @ApiModelProperty("Тип задачи")
     private TaskTypeModel type;
 
     @ApiModelProperty("Исполнитель")
     private UserModel assignee;
+
+    @ApiModelProperty("Реакция")
+    private ReactionModel reaction;
 
     @ApiModelProperty("Необходимая дата\\время выполнения")
     private LocalDateTime dateTo;

@@ -107,16 +107,21 @@ insert into UserGroup (group_id, user_id) values (23, 17);
 insert into UserGroup (group_id, user_id) values (24, 18);
 insert into UserGroup (group_id, user_id) values (24, 19);
 
+create table taskgroup (
+    id BIGINT primary key auto_increment,
+    code VARCHAR(100)
+);
+insert into taskgroup(id, code) values (0, 'Постоянная заявка');
+insert into taskgroup(id, code) values (1, 'Периодическая заявка');
+
 create table TASKTYPE (
     id BIGINT primary key auto_increment,
     code VARCHAR(100)
 );
-insert into TASKTYPE(id, code) values (0, 'Постоянная заявка');
-insert into TASKTYPE(id, code) values (1, 'Периодическая заявка');
-insert into TASKTYPE(id, code) values (2, 'Информационное сообщение');
-insert into TASKTYPE(id, code) values (3, 'Поручение: организационное');
-insert into TASKTYPE(id, code) values (4, 'Поручение: технологическое');
-insert into TASKTYPE(id, code) values (5, 'Поручение: техническое');
+insert into TASKTYPE(id, code) values (0, 'Информационное сообщение');
+insert into TASKTYPE(id, code) values (1, 'Поручение: организационное');
+insert into TASKTYPE(id, code) values (2, 'Поручение: технологическое');
+insert into TASKTYPE(id, code) values (3, 'Поручение: техническое');
 
 create table STATUSTYPE (
     id BIGINT primary key auto_increment,
@@ -128,6 +133,15 @@ insert into STATUSTYPE(id, code) values (2, 'Простаивает');
 insert into STATUSTYPE(id, code) values (3, 'Выполнено');
 insert into STATUSTYPE(id, code) values (4, 'Ознакомлен');
 insert into STATUSTYPE(id, code) values (5, 'фтопку');
+
+create table reaction (
+    id BIGINT primary key auto_increment,
+    code VARCHAR(100)
+);
+insert into reaction(id, code) values (0, 'Понял-принял');
+insert into reaction(id, code) values (1, 'Взял в работу');
+insert into reaction(id, code) values (2, 'Не будет выполнено');
+insert into reaction(id, code) values (3, 'Отказано');
 
 create table department (
     id BIGINT primary key auto_increment,
@@ -197,12 +211,23 @@ create table Task (
     info VARCHAR(2500),
     status_id BIGINT DEFAULT 0,
     priority_id BIGINT,
-    parent_id BIGINT
+    parent_id BIGINT,
+    group_id bigint,
+    reaction_id bigint
 );
-insert into Task (type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id) values (
-0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт', 1);
-insert into Task (type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, parent_id) values (
-0, 100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 10, 'Выпить, закусить', 'Работать быстрра', 1, 1);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
+1, 0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт', 1, 0, 0);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, parent_id) values (
+2, 0, 100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 10, 'Выпить, закусить', 'Работать быстрра', 1, 1);
+
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id) values (
+3, 3, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать танк', 'Надо собрать самый быстрый танк, чтоб давить немцев', 1, 1);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, parent_id) values (
+4, 3, 110, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Собрать левую гусеницу', 'вот так то и так то из таких то материалов', 1, 3);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, parent_id, reaction_id, priority_id) values (
+5, 3, 111, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Собрать правую гусеницу', 'вот так то и так то из таких то материалов', 3, 1, 0);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, parent_id, reaction_id, priority_id) values (
+6, 2, 111, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Нарвать малины', 'там то и там то', 3, 1, 3);
 
 create table comment (
         id BIGINT primary key auto_increment,

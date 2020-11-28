@@ -2,9 +2,11 @@ package ru.gitpub.rosatom.services;
 
 import org.springframework.stereotype.Service;
 import ru.gitpub.rosatom.domain.entities.Comment;
+import ru.gitpub.rosatom.domain.entities.Reaction;
 import ru.gitpub.rosatom.domain.entities.Task;
 import ru.gitpub.rosatom.domain.repos.CommentRepository;
 import ru.gitpub.rosatom.domain.repos.PriorityRepository;
+import ru.gitpub.rosatom.domain.repos.ReactionRepository;
 import ru.gitpub.rosatom.domain.repos.StatusTypeRepository;
 import ru.gitpub.rosatom.domain.repos.TaskRepository;
 import ru.gitpub.rosatom.domain.repos.TaskTypeRepository;
@@ -30,15 +32,22 @@ public class TaskService {
     private final CommentRepository commentRepository;
 
     private final TaskTypeRepository taskTypeRepository;
+    private final ReactionRepository reactionRepository;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository, StatusTypeRepository statusTypeRepository, PriorityRepository priorityRepository, CommentRepository commentRepository,
-            TaskTypeRepository taskTypeRepository) {
+    public TaskService(TaskRepository taskRepository,
+            UserRepository userRepository,
+            StatusTypeRepository statusTypeRepository,
+            PriorityRepository priorityRepository,
+            CommentRepository commentRepository,
+            TaskTypeRepository taskTypeRepository,
+            ReactionRepository reactionRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.statusTypeRepository = statusTypeRepository;
         this.priorityRepository = priorityRepository;
         this.commentRepository = commentRepository;
         this.taskTypeRepository = taskTypeRepository;
+        this.reactionRepository = reactionRepository;
     }
 
     public Long create(TaskResource r) {
@@ -85,5 +94,16 @@ public class TaskService {
         c.setContent(commentResource.getContent());
         c.setTaskId(taskId);
         return commentRepository.save(c).getId();
+    }
+
+    public void reaction(Long taskId, Long reactionId) {
+        Reaction r = reactionRepository.findById(reactionId)
+                .orElseThrow(() -> new RuntimeException(("Реакция с ид " + reactionId + " не найдена")));
+
+        taskRepository.findById(taskId)
+                .map(task -> {
+                    task.setReaction(r);
+                    return taskRepository.save(task);
+                });
     }
 }
