@@ -201,6 +201,8 @@ create table Task (
 );
 insert into Task (type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id) values (
 0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт', 1);
+insert into Task (type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, parent_id) values (
+0, 100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 10, 'Выпить, закусить', 'Работать быстрра', 1, 1);
 
 create table comment (
         id BIGINT primary key auto_increment,

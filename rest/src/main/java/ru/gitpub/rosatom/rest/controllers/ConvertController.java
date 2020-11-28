@@ -2,6 +2,7 @@ package ru.gitpub.rosatom.rest.controllers;
 
 import java.io.IOException;
 
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 @RestController
+@Api(tags = {"Цеха"})
 public class ConvertController {
 
     private final SpeechConverter speechConverter;
