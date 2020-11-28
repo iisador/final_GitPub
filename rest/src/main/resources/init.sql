@@ -208,4 +208,14 @@ create table comment (
         author_id bigint not null,
         content varchar(1500) not null
 );
-insert into comment(task_id, author_id, content) values (1, 10, 'нехочу')
+insert into comment(task_id, author_id, content) values (1, 10, 'нехочу');
+
+create table attachment (
+        id BIGINT primary key auto_increment,
+        task_id bigint not null,
+        tstmpCreate TIMESTAMP default CURRENT_TIMESTAMP,
+        author_id bigint,
+        name varchar(150),
+        content blob
+);
+insert into attachment(task_id, author_id, name, content) values (1, 10, 'картинка.png', '032348762039847629837603874602');

@@ -3,6 +3,7 @@ package ru.gitpub.rosatom.rest.controllers.converters;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.gitpub.rosatom.domain.entities.Task;
+import ru.gitpub.rosatom.domain.repos.AttachmentRepository;
 import ru.gitpub.rosatom.domain.repos.CommentRepository;
 import ru.gitpub.rosatom.domain.repos.TaskRepository;
 import ru.gitpub.rosatom.rest.controllers.models.TaskModel;
@@ -26,8 +27,19 @@ public class TaskConverter implements Converter<Task, TaskModel> {
 
     private final TaskTypeConverter taskTypeConverter;
 
-    public TaskConverter(UserConverter userConverter, TaskRepository taskRepository, CommentRepository commentRepository, PriorityConverter priorityConverter,
-            StatusTypeConverter statusTypeConverter, CommentConverter commentConverter, TaskTypeConverter taskTypeConverter) {
+    private final AttachmentConverter attachmentConverter;
+
+    private final AttachmentRepository attachmentRepository;
+
+    public TaskConverter(UserConverter userConverter,
+            TaskRepository taskRepository,
+            CommentRepository commentRepository,
+            PriorityConverter priorityConverter,
+            StatusTypeConverter statusTypeConverter,
+            CommentConverter commentConverter,
+            TaskTypeConverter taskTypeConverter,
+            AttachmentConverter attachmentConverter,
+            AttachmentRepository attachmentRepository) {
         this.userConverter = userConverter;
         this.taskRepository = taskRepository;
         this.commentRepository = commentRepository;
@@ -35,6 +47,8 @@ public class TaskConverter implements Converter<Task, TaskModel> {
         this.statusTypeConverter = statusTypeConverter;
         this.commentConverter = commentConverter;
         this.taskTypeConverter = taskTypeConverter;
+        this.attachmentConverter = attachmentConverter;
+        this.attachmentRepository = attachmentRepository;
     }
 
     @Override
@@ -56,6 +70,9 @@ public class TaskConverter implements Converter<Task, TaskModel> {
                         .collect(toList()))
                 .withComments(commentRepository.findByTaskIdOrderByIdAsc(task.getId()).stream()
                         .map(commentConverter::convert)
+                        .collect(toList()))
+                .withAttachments(attachmentRepository.findByTaskId(task.getId()).stream()
+                        .map(attachmentConverter::convert)
                         .collect(toList()))
                 .build();
     }
