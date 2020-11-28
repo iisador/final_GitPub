@@ -9,21 +9,26 @@ import edu.cmu.sphinx.api.SpeechResult;
 import org.springframework.stereotype.Service;
 
 @Service
-//@Lazy(value = false)
 public class SpeechConverter {
 
-    private MyRecognizer recognizer;
+    private final MyRecognizer recognizer;
 
-//    public SpeechConverter() throws IOException {
-//        Configuration configuration = new Configuration();
-//        configuration.setAcousticModelPath("resource:/sphinx/zero_ru.cd_cont_4000");
-//        configuration.setDictionaryPath("resource:/sphinx/ru.dic");
-//        configuration.setLanguageModelPath("resource:/sphinx/ru.lm");
-//        //        configuration.setSampleRate(8000);
-//        recognizer = new MyRecognizer(configuration);
-//    }
+    private boolean initialized;
+
+    public SpeechConverter() throws IOException {
+        Configuration configuration = new Configuration();
+        configuration.setAcousticModelPath("resource:/sphinx/zero_ru.cd_cont_4000");
+        configuration.setDictionaryPath("resource:/sphinx/ru.dic");
+        configuration.setLanguageModelPath("resource:/sphinx/ru.lm");
+        recognizer = new MyRecognizer(configuration);
+    }
 
     public String convert(InputStream speech) {
+        if (!initialized) {
+            recognizer.init();
+            initialized = true;
+        }
+
         recognizer.startRecognition(speech);
         SpeechResult result;
         StringBuilder text = new StringBuilder();
@@ -37,6 +42,9 @@ public class SpeechConverter {
 
         public MyRecognizer(Configuration configuration) throws IOException {
             super(configuration);
+        }
+
+        public void init() {
             recognizer.allocate();
         }
 

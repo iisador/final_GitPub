@@ -201,6 +201,8 @@ create table Task (
 );
 insert into Task (type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id) values (
 0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт', 1);
+insert into Task (type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, parent_id) values (
+0, 100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 10, 'Выпить, закусить', 'Работать быстрра', 1, 1);
 
 create table comment (
         id BIGINT primary key auto_increment,
@@ -208,4 +210,14 @@ create table comment (
         author_id bigint not null,
         content varchar(1500) not null
 );
-insert into comment(task_id, author_id, content) values (1, 10, 'нехочу')
+insert into comment(task_id, author_id, content) values (1, 10, 'нехочу');
+
+create table attachment (
+        id BIGINT primary key auto_increment,
+        task_id bigint not null,
+        tstmpCreate TIMESTAMP default CURRENT_TIMESTAMP,
+        author_id bigint,
+        name varchar(150),
+        content blob
+);
+insert into attachment(task_id, author_id, name, content) values (1, 10, 'картинка.png', '032348762039847629837603874602');

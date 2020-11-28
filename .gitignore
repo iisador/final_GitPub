@@ -8,3 +8,4 @@ target/
 *.db
 ../node_modules/
 node_modules
+/rest/src/main/resources/sphinx/

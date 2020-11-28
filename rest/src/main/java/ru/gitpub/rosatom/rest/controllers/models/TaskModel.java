@@ -52,5 +52,9 @@ public class TaskModel implements Serializable {
     @ApiModelProperty("Подзадачи")
     private List<TaskModel> subTaskList;
 
+    @ApiModelProperty("Комментарии")
     private List<CommentModel> comments;
+
+    @ApiModelProperty("Приложенные файлы")
+    private List<AttachmentModel> attachments;
 }
