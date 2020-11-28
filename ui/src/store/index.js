@@ -7,7 +7,8 @@ export default new Vuex.Store({
     state: {
         users: '',
         tasks: '',
-        taskTypes: ''
+        taskTypes: '',
+        voice: ''
     },
 
     mutations: {

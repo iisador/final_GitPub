@@ -6,6 +6,7 @@
                     v-for="comment in modalTaskComments"
                     :modalTaskCommentText="comment.content"
                     :modalTaskCommentAuthor="comment.author.name"
+                    :key="comment.id"
                 />
             </a-tab-pane>
             <a-tab-pane key="2" tab="Вложенные задачи" force-render>

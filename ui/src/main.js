@@ -16,7 +16,9 @@ Vue.use(Tabs);
 window._ = require('lodash');
 window.axios = require('axios')
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+let recognition = new window.webkitSpeechRecognition;
 
 new Vue({
   store,
