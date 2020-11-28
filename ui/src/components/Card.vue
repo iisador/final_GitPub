@@ -38,6 +38,7 @@
                     :taskDateTo="taskDateTo"
                     :modalTaskText="modalTaskText"
                     :subTaskList="subTaskList"
+                    :modalTaskComments="modalTaskComments"
                 />
             </a-modal>
         </a-card>
@@ -68,7 +69,8 @@
             'taskAssigneePosition',
             'taskDateTo',
             'modalTaskText',
-            'subTaskList'
+            'subTaskList',
+            'modalTaskComments'
         ],
         data() {
             return {

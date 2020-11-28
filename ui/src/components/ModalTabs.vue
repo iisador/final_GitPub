@@ -2,7 +2,11 @@
     <div>
         <a-tabs default-active-key="1">
             <a-tab-pane key="1" tab="Комментарии">
-                <ModalTaskComment />
+                <ModalTaskComment
+                    v-for="comment in modalTaskComments"
+                    :modalTaskCommentText="comment.content"
+                    :modalTaskCommentAuthor="comment.author.name"
+                />
             </a-tab-pane>
             <a-tab-pane key="2" tab="Вложенные задачи" force-render>
                 <ModalNewTask
@@ -22,7 +26,8 @@
         name: "ModalTabs",
         props: [
             'getNewTask',
-            'subTaskList'
+            'subTaskList',
+            'modalTaskComments'
         ],
         components: {
             ModalTaskComment,

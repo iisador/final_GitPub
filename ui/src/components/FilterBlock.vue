@@ -2,22 +2,22 @@
     <div class="app-filter">
         <a-input placeholder="Поиск по задачам" class="app-filter__input" />
         <a-button
-                type="primary"
-                icon="plus"
-                class="app-filter__button"
-                size="small"
-                @click="showModal"
+            type="primary"
+            icon="plus"
+            class="app-filter__button"
+            size="small"
+            @click="showModal"
         >
-            создать зачачу
+            Создать задачу
         </a-button>
         <a-modal
-                title="Создание задачи"
-                :visible="visible"
-                @ok="handleOk"
-                @cancel="handleCancel"
-                okText="Создать"
-                cancelText="Отменить"
-                class="app-modal-create"
+            title="Создание задачи"
+            :visible="visible"
+            @ok="handleOk"
+            @cancel="handleCancel"
+            okText="Создать"
+            cancelText="Отменить"
+            class="app-modal-create"
         >
             <ModalContent />
         </a-modal>

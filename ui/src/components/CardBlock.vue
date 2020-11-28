@@ -15,6 +15,7 @@
             :taskDateTo="task.dateTo"
             :modalTaskText="task.info"
             :subTaskList="task.subTaskList"
+            :modalTaskComments="task.comments"
             :key="task.id"
         />
     </div>

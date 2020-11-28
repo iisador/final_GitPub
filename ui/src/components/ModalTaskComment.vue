@@ -1,10 +1,10 @@
 <template>
     <div class="app-card app-modal-task-comment">
         <a-card>
-            <span class="app-modal-task__info-title">Иванов Петр Иванович</span>
+            <span class="app-modal-task__info-title">{{ modalTaskCommentAuthor }}</span>
             <span>10:43   27 Ноя 2020</span>
         </a-card>
-        <div class="app-modal-task-comment__text">{{ ModalTaskCommentText }}</div>
+        <div class="app-modal-task-comment__text">{{ modalTaskCommentText }}</div>
         <a href="#">Смотреть фото</a>
         <a href="#">Ответить</a>
 
@@ -18,11 +18,11 @@
 <script>
     export default {
         name: "ModalTaskComment",
-        data() {
-            return {
-                ModalTaskCommentText: 'Таким образом постоянный количественный рост и сфера нашей активности позволяет выполнять важные задания по разработке соответствующий условий активизации.'
-            }
-        }
+        props: [
+            'modalTaskComments',
+            'modalTaskCommentText',
+            'modalTaskCommentAuthor'
+        ]
     }
 </script>
 
