@@ -10,9 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 /**
  * Настройка безопасности приложения.
  */
-@Configuration
-@EnableWebSecurity
-@Profile("secure")
+//@Configuration
+//@EnableWebSecurity
+//@Profile("secure")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override

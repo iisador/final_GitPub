@@ -187,7 +187,7 @@ insert into priority(id, code) values (5, 'Можно не делать');
 
 create table Task (
     id BIGINT primary key auto_increment,
-    type BIGINT not null,
+    type_id BIGINT not null,
     assignee_id BIGINT,
     dateTo TIMESTAMP,
     dateFact TIMESTAMP,
@@ -199,5 +199,13 @@ create table Task (
     priority_id BIGINT,
     parent_id BIGINT
 );
-insert into Task (type, assignee_id, dateTo, dateFact, author_id, header, info, priority_id) values (
+insert into Task (type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id) values (
 0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт', 1);
+
+create table comment (
+        id BIGINT primary key auto_increment,
+        task_id bigint not null,
+        author_id bigint not null,
+        content varchar(1500) not null
+);
+insert into comment(task_id, author_id, content) values (1, 10, 'нехочу')
