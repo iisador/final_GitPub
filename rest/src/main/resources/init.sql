@@ -118,16 +118,16 @@ insert into TASKTYPE(id, code) values (3, 'Поручение: организа�
 insert into TASKTYPE(id, code) values (4, 'Поручение: технологическое');
 insert into TASKTYPE(id, code) values (5, 'Поручение: техническое');
 
-create table STATUS_TYPE (
+create table STATUSTYPE (
     id BIGINT primary key auto_increment,
     code VARCHAR(100)
 );
-insert into status_type(id, code) values (0, 'Новая');
-insert into status_type(id, code) values (1, 'В работе');
-insert into status_type(id, code) values (2, 'Простаивает');
-insert into status_type(id, code) values (3, 'Выполнено');
-insert into status_type(id, code) values (4, 'Ознакомлен');
-insert into status_type(id, code) values (5, 'фтопку');
+insert into STATUSTYPE(id, code) values (0, 'Новая');
+insert into STATUSTYPE(id, code) values (1, 'В работе');
+insert into STATUSTYPE(id, code) values (2, 'Простаивает');
+insert into STATUSTYPE(id, code) values (3, 'Выполнено');
+insert into STATUSTYPE(id, code) values (4, 'Ознакомлен');
+insert into STATUSTYPE(id, code) values (5, 'фтопку');
 
 create table department (
     id BIGINT primary key auto_increment,
@@ -195,9 +195,9 @@ create table Task (
     author_id BIGINT,
     header VARCHAR(250),
     info VARCHAR(2500),
-    status BIGINT DEFAULT 0,
-    priority_id BIGINT default 2,
+    status_id BIGINT DEFAULT 0,
+    priority_id BIGINT,
     parent_id BIGINT
 );
-insert into Task (type, assignee_id, dateTo, dateFact, author_id, header, info) values (
-0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт');
+insert into Task (type, assignee_id, dateTo, dateFact, author_id, header, info, priority_id) values (
+0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Выпить, закусить', 'Петрович, выпей, закуси, потом захерач чугунный болт', 1);

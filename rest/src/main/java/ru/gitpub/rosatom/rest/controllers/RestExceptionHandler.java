@@ -1,7 +1,5 @@
 package ru.gitpub.rosatom.rest.controllers;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.mediatype.problem.Problem;
@@ -16,8 +14,8 @@ public class RestExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(EntityNotFoundException.class)
-    public Problem handle(EntityNotFoundException e) {
+    @ExceptionHandler(Throwable.class)
+    public Problem handle(Throwable e) {
         log.error("", e);
         return Problem.create()
                 .withTitle("Ошибочка")

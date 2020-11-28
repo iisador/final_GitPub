@@ -51,7 +51,7 @@ public class RestWebConfig implements WebMvcConfigurer {
     private static final String DATE_PATTERN = "dd.MM.yyyy";
 
     /** Паттерн для даты-времени. */
-    private static final String DATETIME_PATTERN = "dd.MM.yyyy HH:mm:ss";
+    private static final String DATETIME_PATTERN = "dd.MM.yyyy' 'HH:mm";
 
     /** Форматтер для даты-времени. */
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_PATTERN);

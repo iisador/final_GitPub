@@ -3,18 +3,26 @@ package ru.gitpub.rosatom.rest.controllers.converters;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.gitpub.rosatom.domain.entities.Task;
+import ru.gitpub.rosatom.domain.repos.TaskRepository;
 import ru.gitpub.rosatom.rest.controllers.models.TaskModel;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class TaskConverter implements Converter<Task, TaskModel> {
 
     private final UserConverter userConverter;
 
-    private final PriorityConverter priorityConverter;
+    private final TaskRepository taskRepository;
 
-    public TaskConverter(UserConverter userConverter, PriorityConverter priorityConverter) {
+    private final PriorityConverter priorityConverter;
+    private final StatusTypeConverter statusTypeConverter;
+
+    public TaskConverter(UserConverter userConverter, TaskRepository taskRepository, PriorityConverter priorityConverter, StatusTypeConverter statusTypeConverter) {
         this.userConverter = userConverter;
+        this.taskRepository = taskRepository;
         this.priorityConverter = priorityConverter;
+        this.statusTypeConverter = statusTypeConverter;
     }
 
     @Override
@@ -29,9 +37,11 @@ public class TaskConverter implements Converter<Task, TaskModel> {
                 .withAuthor(userConverter.convert(task.getAuthor()))
                 .withHeader(task.getHeader())
                 .withInfo(task.getInfo())
-                .withStatus(task.getStatus())
+                .withStatus(statusTypeConverter.convert(task.getStatus()))
                 .withPriority(priorityConverter.convert(task.getPriority()))
-                // TODO: найти дочерние задачи
+                .withSubTaskList(taskRepository.findAllByParentId(task.getId()).stream()
+                        .map(this::convert)
+                        .collect(toList()))
                 .build();
     }
 }

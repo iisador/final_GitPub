@@ -2,6 +2,7 @@ package ru.gitpub.rosatom.rest.controllers.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -43,11 +44,11 @@ public class TaskModel implements Serializable {
     private String info;
 
     @ApiModelProperty("Статус задачи")
-    private Long status;
+    private StatusTypeModel status;
 
     @ApiModelProperty("Приоритет")
     private PriorityModel priority;
 
-    @ApiModelProperty("Родительская задача")
-    private TaskModel parent;
+    @ApiModelProperty("Подзадачи")
+    private List<TaskModel> subTaskList;
 }

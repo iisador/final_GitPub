@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -45,12 +46,17 @@ public class Task implements Serializable {
     @Column
     private String info;
 
-    @Column
-    private Long status;
+    @OneToOne
+    private StatusType status;
 
     @OneToOne
     private Priority priority;
 
-    @OneToOne(targetEntity = Task.class)
-    private Task parent;
+    @Column(name = "parent_id")
+    private Long parentId;
+
+    @PrePersist
+    void onCreate() {
+        tstmpCreate = LocalDateTime.now();
+    }
 }
