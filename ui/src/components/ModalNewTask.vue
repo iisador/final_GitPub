@@ -42,7 +42,8 @@
         name: "ModalNewTask",
         props: [
             'getNewTask',
-            'subTaskList'
+            'subTaskList',
+            'getTaskArr'
         ],
         components: {
             ModalContent,
@@ -57,16 +58,12 @@
             showModal() {
                 this.visible = true;
             },
-            handleOk(e) {
-                this.ModalText = 'The modal will be closed after two seconds';
-                this.confirmLoading = true;
+            handleOk(e, data) {
                 setTimeout(() => {
                     this.visible = false;
-                    this.confirmLoading = false;
-                }, 2000);
+                }, 1000);
             },
             handleCancel(e) {
-                console.log('Clicked cancel button');
                 this.visible = false;
             },
         }

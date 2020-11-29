@@ -4,7 +4,8 @@
             <a-input
                 placeholder="Тип задачи"
                 class="app-filter__input app-modal-content__input"
-                :value="taskType"
+                :value="taskArr.type"
+                v-model="taskArr.type"
             />
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskType">
         </div>
@@ -12,7 +13,8 @@
             <a-input
                 placeholder="Заголовок"
                 class="app-filter__input app-modal-content__input"
-                :value="taskTitle"
+                :value="taskArr.header"
+                v-model="taskArr.header"
             />
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskTitle">
         </div>
@@ -20,7 +22,8 @@
             <a-textarea
                 placeholder="Описание"
                 class="app-filter__input"
-                :value="taskDescr"
+                :value="taskArr.info"
+                v-model="taskArr.info"
             />
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDescr">
         </div>
@@ -29,7 +32,8 @@
                 <a-input
                     placeholder="Исполнитель"
                     class="app-filter__input app-modal-content__input"
-                    :value="taskAssignee"
+                    :value="taskArr.assignee"
+                    v-model="taskArr.assignee"
                 />
                 <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskAssignee">
             </div>
@@ -37,7 +41,8 @@
                 <a-input
                     placeholder="Срок выполнения"
                     class="app-filter__input app-modal-content__input"
-                    :value="taskDate"
+                    :value="taskArr.dateTo"
+                    v-model="taskArr.dateTo"
                 />
                 <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDate">
             </div>
@@ -47,7 +52,8 @@
                 <a-input
                     placeholder="Важность"
                     class="app-filter__input app-modal-content__input"
-                    :value="taskPriority"
+                    :value="taskArr.priority"
+                    v-model="taskArr.priority"
                 />
                 <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskPriority">
             </div>
@@ -55,7 +61,8 @@
                 <a-input
                     placeholder="Вид деятельности"
                     class="app-filter__input app-modal-content__input"
-                    :value="taskPosition"
+                    :value="taskArr.taskPosition"
+                    v-model="taskArr.taskPosition"
                 />
                 <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskPosition">
             </div>
@@ -74,15 +81,23 @@
 
     export default {
         name: "ModalContent",
+        props: [ 'getTaskArr' ],
+        mounted() {
+            this.$store.dispatch('TASK_ARR', this.taskArr)
+        },
         data() {
             return {
-                taskType: '',
-                taskTitle: '',
-                taskDescr: '',
-                taskAssignee: '',
-                taskDate: '',
-                taskPriority: '',
-                taskPosition: ''
+                taskArr: {
+                    type: null,
+                    header: null,
+                    info: null,
+                    assignee: null,
+                    dateTo: null,
+                    dateFact: null,
+                    priority: null,
+                    taskPosition: null,
+                    author: null
+                }
             }
         },
         methods: {
@@ -90,7 +105,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskType = result[0].transcript;
+                        this.taskArr.type = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -99,7 +114,8 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskTitle = result[0].transcript;
+                        this.taskArr.header = result[0].transcript;
+                        this.$store.dispatch('TASK_ARR', this.taskArr)
                     }
                 };
                 recognizer.start();
@@ -108,7 +124,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskDescr = result[0].transcript;
+                        this.taskArr.info = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -117,7 +133,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskAssignee = result[0].transcript;
+                        this.taskArr.assignee = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -126,7 +142,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskDate = result[0].transcript;
+                        this.taskArr.dateTo = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -135,7 +151,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskPriority = result[0].transcript;
+                        this.taskArr.priority = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -144,12 +160,15 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskPosition = result[0].transcript;
+                        this.taskArr.taskPosition = result[0].transcript;
+                        this.getTask({
+                            data: this.taskArr
+                        })
                     }
                 };
                 recognizer.start();
-            }
-        }
+            },
+        },
     }
 </script>
 

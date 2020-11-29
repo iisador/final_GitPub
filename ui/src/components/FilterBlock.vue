@@ -33,23 +33,21 @@
         },
         data() {
             return {
-                visible: false
+                visible: false,
+                taskArr: this.$store.state.taskArr
             };
         },
         methods: {
             showModal() {
                 this.visible = true;
             },
-            handleOk(e) {
-                this.ModalText = 'The modal will be closed after two seconds';
-                this.confirmLoading = true;
+            handleOk(e, data) {
                 setTimeout(() => {
                     this.visible = false;
-                    this.confirmLoading = false;
                 }, 2000);
+                this.$store.dispatch('NEW_TASK', this.$store.state.taskArr)
             },
             handleCancel(e) {
-                console.log('Clicked cancel button');
                 this.visible = false;
             },
         }

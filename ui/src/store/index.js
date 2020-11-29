@@ -8,7 +8,8 @@ export default new Vuex.Store({
         users: '',
         tasks: '',
         taskTypes: '',
-        voice: ''
+        voice: '',
+        taskArr: ''
     },
 
     mutations: {
@@ -22,6 +23,10 @@ export default new Vuex.Store({
 
         GET_TASKS_TYPE(state, payload) {
             state.taskTypes = payload.data.content;
+        },
+
+        TASK_ARR(state, payload) {
+            state.taskArr = payload;
         }
     },
 
@@ -46,14 +51,22 @@ export default new Vuex.Store({
             await axios
                 .get('http://localhost:9000/api/task/types')
                 .then(response => {
-                    commit('GET_TASKS_TYPE',response)
+                    commit('GET_TASKS_TYPE', response)
                 })
         },
+
+        TASK_ARR: function(store, payload) {
+            store.commit('TASK_ARR', payload)
+        },
+
+        NEW_TASK: async ({commit}, payload) => {
+            console.log(payload)
+            await axios
+                .post('http://localhost:9000/api/tasks', payload)
+        }
     },
 
     getters: {
-        // GET_USERS(state) {
-        //     return state.geoZones;
-        // },
+
     }
 })
