@@ -230,7 +230,7 @@ insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header,
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
 10, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Проверка детали 3312', 'Проверить устойчивость детали 3312 к устойчивости на температурные и вибрационные воздействия', 3, 0, 0);
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
-8, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Установить деталь М2-631 в корпус', 'С веслами и всем таким вот', 2, 0, 0);
+8, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Установить деталь М2-631 в корпус', 'Установить деталь М2-631 в корпус', 2, 0, 0);
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
 9, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Провести вибрационные испытания в рамках ОКР Зима-К', 'Провести вибрационные испытания в рамках ОКР Зима-К', 4, 0, 0);
 
