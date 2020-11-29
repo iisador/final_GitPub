@@ -31,6 +31,10 @@ public class TaskConverter implements Converter<Task, TaskModel> {
 
     private final AttachmentRepository attachmentRepository;
 
+    private final GroupConverter groupConverter;
+
+    private final ReactionConverter reactionConverter;
+
     public TaskConverter(UserConverter userConverter,
             TaskRepository taskRepository,
             CommentRepository commentRepository,
@@ -39,7 +43,9 @@ public class TaskConverter implements Converter<Task, TaskModel> {
             CommentConverter commentConverter,
             TaskTypeConverter taskTypeConverter,
             AttachmentConverter attachmentConverter,
-            AttachmentRepository attachmentRepository) {
+            AttachmentRepository attachmentRepository,
+            GroupConverter groupConverter,
+            ReactionConverter reactionConverter) {
         this.userConverter = userConverter;
         this.taskRepository = taskRepository;
         this.commentRepository = commentRepository;
@@ -49,6 +55,8 @@ public class TaskConverter implements Converter<Task, TaskModel> {
         this.taskTypeConverter = taskTypeConverter;
         this.attachmentConverter = attachmentConverter;
         this.attachmentRepository = attachmentRepository;
+        this.groupConverter = groupConverter;
+        this.reactionConverter = reactionConverter;
     }
 
     @Override
@@ -74,6 +82,8 @@ public class TaskConverter implements Converter<Task, TaskModel> {
                 .withAttachments(attachmentRepository.findByTaskId(task.getId()).stream()
                         .map(attachmentConverter::convert)
                         .collect(toList()))
+                .withGroup(task.getGroup().map(groupConverter::convert).orElse(null))
+                .withReaction(task.getReaction().map(reactionConverter::convert).orElse(null))
                 .build();
     }
 }

@@ -3,6 +3,7 @@ package ru.gitpub.rosatom.domain.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -60,8 +61,22 @@ public class Task implements Serializable {
     @OneToMany
     private List<Comment> comments;
 
+    @OneToOne
+    private Group group;
+
+    @OneToOne
+    private Reaction reaction;
+
     @PrePersist
     void onCreate() {
         tstmpCreate = LocalDateTime.now();
+    }
+
+    public Optional<Group> getGroup() {
+        return Optional.ofNullable(group);
+    }
+
+    public Optional<Reaction> getReaction() {
+        return Optional.ofNullable(reaction);
     }
 }

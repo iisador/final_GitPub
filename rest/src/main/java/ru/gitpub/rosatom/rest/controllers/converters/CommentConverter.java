@@ -20,6 +20,8 @@ public class CommentConverter implements Converter<Comment, CommentModel> {
                 .withId(comment.getId())
                 .withAuthor(userConverter.convert(comment.getAuthor()))
                 .withContent(comment.getContent())
+                .withTstmpCreate(comment.getTstmpCreate())
+                .withClosing(comment.getClosing())
                 .build();
     }
 }

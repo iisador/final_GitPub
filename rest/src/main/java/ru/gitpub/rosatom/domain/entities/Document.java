@@ -1,14 +1,17 @@
 package ru.gitpub.rosatom.domain.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,30 +19,25 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Comment implements Serializable {
+public class Document implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "task_id")
-    private Long taskId;
+    @Column
+    private String name;
+
+    @Column
+    private LocalDate date;
 
     @OneToOne
     private User author;
 
     @Column
-    private String content;
-
-    @Column
     private LocalDateTime tstmpCreate;
 
-    @PrePersist
-    void onCreate() {
-        tstmpCreate = LocalDateTime.now();
-        closing = false;
-    }
-
-    @Column
-    private Boolean closing;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] content;
 }

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,12 +66,16 @@ public class TaskController {
             @RequestParam(required = false)
             @Parameter(description = "Фильтр по автору задачи", example = "0")
                     Long authorId,
+            @RequestParam(required = false)
+            @Parameter(description = "Фильтр по группе", example = "0")
+                    Long groupId,
             Pageable pageable) {
         TaskFilter filter = TaskFilter.builder()
                 .withType(typeId)
                 .withStatusId(statusId)
                 .withAssigneeId(assigneeId)
                 .withAuthorId(authorId)
+                .withGroupId(groupId)
                 .build();
         return taskRepository.findAll(filter, pageable)
                 .map(e -> conversionService.convert(e, TaskModel.class));
@@ -102,6 +107,19 @@ public class TaskController {
         return ResponseEntity.ok(taskService.create(task));
     }
 
+    @Operation(summary = "Обновление задачи",
+            tags = {"Задача"},
+            description = "Обновление",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "ок не ок",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
+    @PatchMapping(value = "/api/tasks/{taskId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> update(@PathVariable Long taskId,
+            @RequestBody TaskResource task) {
+        taskService.update(taskId, task);
+        return ResponseEntity.ok("OK");
+    }
+
     @Operation(summary = "Создание подзадачи",
             tags = {"Задача"},
             description = "Создание задачи или подзадачи",
@@ -127,8 +145,52 @@ public class TaskController {
                     @ApiResponse(responseCode = "200", description = "Ид коммента, если все ок",
                             content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
     @PostMapping(value = "/api/tasks/{taskId}/comments", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Long> comment(@PathVariable Long taskId,
-            @RequestBody CommentResource commentResource) {
+    public ResponseEntity<Long> comment(
+            @Parameter(description = "Ид задачи", example = "1")
+            @PathVariable
+                    Long taskId,
+
+            @Parameter(description = "Ресурс комментария")
+            @RequestBody
+                    CommentResource commentResource) {
         return ResponseEntity.ok(taskService.comment(taskId, commentResource));
+    }
+
+    @Operation(summary = "Добавить реакцию к задаче",
+            tags = {"Задача"},
+            description = "Добавление реакции",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "ок не ок",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
+    @PostMapping(value = "/api/tasks/{taskId}/reaction", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> reaction(
+            @Parameter(description = "Ид задачи", example = "1")
+            @PathVariable
+                    Long taskId,
+
+            @Parameter(description = "Ид реакции", example = "1")
+            @RequestParam
+                    Long reactionId) {
+        taskService.reaction(taskId, reactionId);
+        return ResponseEntity.ok("OK");
+    }
+
+    @Operation(summary = "Изменить статус задачи",
+            tags = {"Задача"},
+            description = "Изменение статуса",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "ок не ок",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
+    @PostMapping(value = "/api/tasks/{taskId}/status", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> changeStatus(
+            @Parameter(description = "Ид задачи", example = "1")
+            @PathVariable
+                    Long taskId,
+
+            @Parameter(description = "Ид статуса", example = "1")
+            @RequestParam
+                    Long statusId) {
+        taskService.status(taskId, statusId);
+        return ResponseEntity.ok("OK");
     }
 }

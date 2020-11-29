@@ -15,4 +15,7 @@ public class CommentResource implements Serializable {
 
     @ApiModelProperty(value = "Сам коммент", required = true)
     private String content;
+
+    @ApiModelProperty(value = "Признак закрывающего комментария")
+    private Boolean closing;
 }

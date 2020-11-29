@@ -1,6 +1,7 @@
 package ru.gitpub.rosatom.rest.controllers.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,4 +23,10 @@ public class CommentModel implements Serializable {
 
     @ApiModelProperty("Содержание")
     private String content;
+
+    @ApiModelProperty("Время создания")
+    private LocalDateTime tstmpCreate;
+
+    @ApiModelProperty("Метка закрывающего комментария")
+    private Boolean closing;
 }
