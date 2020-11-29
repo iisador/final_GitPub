@@ -221,25 +221,25 @@ insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header,
 2, 0, 100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 10, 'Создание подзадач для рабочих', 'Будет создано 13 задач', 1, 1);
 
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id) values (
-3, 3, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать танк', 'Надо собрать самый быстрый танк', 1, 1);
+3, 3, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Проверить устойчивость детали 355332', 'Проверить устойчивость детали 355332 к устойчивости на температурные и вибрационные воздействия', 1, 1);
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, parent_id) values (
-4, 3, 110, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Собрать левую гусеницу', 'вот так то и так то из таких то материалов', 1, 3);
-insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, parent_id, reaction_id, priority_id) values (
-5, 3, 111, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Собрать правую гусеницу', 'вот так то и так то из таких то материалов', 3, 1, 0);
-insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, parent_id, reaction_id, priority_id) values (
-6, 2, 111, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Создать башню', 'там то и там то', 3, 1, 3);
+4, 3, 110, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Проверить устойчивость детали 355332', 'установка оснастки для температурных испытаний детали 355332 к устойчивости на температурные и вибрационные воздействия', 1, 3);
 
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
-7, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать мопед', 'без руля, чтоб силой мысли управлять можно было', 3, 0, 0);
+7, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Проверить устойчивость детали 234', 'Проверить устойчивость детали 234 к устойчивости на температурные и вибрационные воздействия', 3, 0, 0);
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
-10, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать самокат', 'С одним колесом и мотором', 3, 0, 0);
+10, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Проверка детали 3312', 'Проверить устойчивость детали 3312 к устойчивости на температурные и вибрационные воздействия', 3, 0, 0);
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
-8, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать лодку', 'С веслами и всем таким вот', 2, 0, 0);
+8, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Установить деталь М2-631 в корпус', 'С веслами и всем таким вот', 2, 0, 0);
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
-9, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать атом водорода', 'Собрать атом водорода из протонов и нейтронов', 4, 0, 0);
+9, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Провести вибрационные испытания в рамках ОКР Зима-К', 'Провести вибрационные испытания в рамках ОКР Зима-К', 4, 0, 0);
 
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
 11, 0, 13, PARSEDATETIME('29.11.2020 00:00:00','dd.MM.yyyy hh:mm:ss','en'), null, 0, 'Заполнить журнал техники безопасности', 'заполнить журнал ТБ за смену', 3, 0, 0);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
+12, 3, 13, PARSEDATETIME('29.11.2020 00:00:00','dd.MM.yyyy hh:mm:ss','en'), null, 0, 'Провести обучение сотрудников', 'Провести обучение сотрудников по работе с ПО "Призма"', 3, 0, 0);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id, parent_id) values (
+13, 2, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Провести обучение сотрудников', 'Собрать сотрудников в конференц-зале сегодня в 15:00 ', 4, 0, 0, 12);
 create table comment (
         id BIGINT primary key auto_increment,
         task_id bigint not null,
@@ -261,7 +261,7 @@ create table attachment (
         comment_id bigint
 );
 insert into attachment(task_id, author_id, name, content, url) values (1, 10, 'картинка.png', '032348762039847629837603874602', 'https://img5.lalafo.com/i/posters/original/3e/c6/aa50cf11f4b04cbf4790cee7169f.jpeg');
-insert into attachment(comment_id, author_id, name, content, url) values (1, 10, 'картинка.png', '032348762039847629837603874602', 'https://img5.lalafo.com/i/posters/original/3e/c6/aa50cf11f4b04cbf4790cee7169f.jpeg');
+insert into attachment(comment_id, author_id, name, content, url) values (1, 10, 'картинка.png', '032348762039847629837603874602', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAQRPJxJzJVjGKhKu77fWr1jL1i5C-tlrudQ&usqp=CAU');
 
 create table userhousing (
     id BIGINT primary key auto_increment,

@@ -167,7 +167,8 @@ public class RestWebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("*");
+                .allowedOrigins("*")
+        .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE");
     }
 
     /**
