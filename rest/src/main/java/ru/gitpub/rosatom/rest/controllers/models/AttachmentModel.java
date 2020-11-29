@@ -22,4 +22,7 @@ public class AttachmentModel implements Serializable {
 
     @ApiModelProperty("Автор аттача")
     private UserModel author;
+
+    @ApiModelProperty("URL")
+    private String url;
 }

@@ -19,6 +19,7 @@ public class AttachmentConverter implements Converter<Attachment, AttachmentMode
         return AttachmentModel.builder()
                 .withId(attachment.getId())
                 .withName(attachment.getName())
+                .withUrl(attachment.getUrl())
                 .withAuthor(userConverter.convert(attachment.getAuthor()))
                 .build();
     }

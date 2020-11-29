@@ -10,4 +10,6 @@ import ru.gitpub.rosatom.domain.entities.Attachment;
 public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
 
     List<Attachment> findByTaskId(Long taskId);
+
+    List<Attachment> findByCommentId(Long commentId);
 }
