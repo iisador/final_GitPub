@@ -234,7 +234,8 @@ create table comment (
         task_id bigint not null,
         author_id bigint not null,
         content varchar(1500) not null,
-        tstmpCreate timestamp default CURRENT_TIMESTAMP
+        tstmpCreate timestamp default CURRENT_TIMESTAMP,
+        closing boolean default false
 );
 insert into comment(task_id, author_id, content) values (1, 10, 'нехочу');
 
@@ -247,3 +248,19 @@ create table attachment (
         content blob
 );
 insert into attachment(task_id, author_id, name, content) values (1, 10, 'картинка.png', '032348762039847629837603874602');
+
+create table userhousing (
+    id BIGINT primary key auto_increment,
+    user_id BIGINT not null,
+    housing_id BIGINT not null,
+    document_id BIGINT not null
+);
+
+create table document (
+    id BIGINT not null,
+    name VARCHAR(250) not null,
+    date DATE not null,
+    author_id bigint,
+    tstmpCreate timestamp default current_timestamp,
+    content blob
+);

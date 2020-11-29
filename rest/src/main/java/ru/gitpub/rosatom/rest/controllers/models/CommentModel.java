@@ -26,4 +26,7 @@ public class CommentModel implements Serializable {
 
     @ApiModelProperty("Время создания")
     private LocalDateTime tstmpCreate;
+
+    @ApiModelProperty("Метка закрывающего комментария")
+    private Boolean closing;
 }

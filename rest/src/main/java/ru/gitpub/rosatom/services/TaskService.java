@@ -94,6 +94,7 @@ public class TaskService {
         c.setAuthor(userRepository.findById(commentResource.getAuthorId())
                 .orElseThrow(() -> new RuntimeException("Пользователь с ид " + commentResource.getAuthorId() + " не найден")));
         c.setContent(commentResource.getContent());
+        c.setClosing(commentResource.getClosing());
         c.setTaskId(taskId);
         return commentRepository.save(c).getId();
     }
