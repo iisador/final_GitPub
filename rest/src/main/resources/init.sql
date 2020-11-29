@@ -237,7 +237,7 @@ create table comment (
         tstmpCreate timestamp default CURRENT_TIMESTAMP,
         closing boolean default false
 );
-insert into comment(task_id, author_id, content) values (1, 10, 'нехочу');
+insert into comment(task_id, author_id, content) values (1, 10, 'так точно!');
 
 create table attachment (
         id BIGINT primary key auto_increment,
