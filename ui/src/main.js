@@ -4,7 +4,7 @@ import store from './store'
 import './assets/scss/main.scss'
 import 'ant-design-vue/dist/antd.css';
 
-import { Card, Tag, Input, Button, Modal, Icon, Tabs, Select } from 'ant-design-vue';
+import { Card, Tag, Input, Button, Modal, Icon, Tabs, Select, DatePicker } from 'ant-design-vue';
 Vue.use(Card);
 Vue.use(Tag);
 Vue.use(Input);
@@ -13,6 +13,7 @@ Vue.use(Modal);
 Vue.use(Icon);
 Vue.use(Tabs);
 Vue.use(Select);
+Vue.use(DatePicker);
 
 window._ = require('lodash');
 window.axios = require('axios');

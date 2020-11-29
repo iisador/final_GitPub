@@ -274,6 +274,11 @@
       right: 15px;
       top: 18px;
       cursor: pointer;
+
+      &-select {
+        top: 31px;
+        right: 5px;
+      }
     }
 
     &__input {

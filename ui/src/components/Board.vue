@@ -31,7 +31,8 @@
         },
         mounted() {
             this.$store.dispatch('GET_USERS');
-            this.$store.dispatch('GET_TASKS_PRIORITY')
+            this.$store.dispatch('GET_TASKS_PRIORITY');
+            this.$store.dispatch('GET_TASKS_POSITIONS');
         },
         computed: {
             ...mapState(['users']),

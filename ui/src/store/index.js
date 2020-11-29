@@ -12,7 +12,8 @@ export default new Vuex.Store({
         taskTypes: '',
         voice: '',
         taskArr: '',
-        taskPriority: ''
+        taskPriority: '',
+        positions: ''
     },
 
     mutations: {
@@ -30,6 +31,10 @@ export default new Vuex.Store({
 
         GET_TASKS_PRIORITY(state, payload) {
             state.taskPriority = payload.data;
+        },
+
+        GET_TASKS_POSITIONS(state, payload) {
+            state.positions = payload.data;
         },
 
         TASK_ARR(state, payload) {
@@ -67,6 +72,14 @@ export default new Vuex.Store({
                 .get('http://localhost:9000/api/task/priorities')
                 .then(response => {
                     commit('GET_TASKS_PRIORITY', response)
+                })
+        },
+
+        GET_TASKS_POSITIONS: async ({commit}) => {
+            await axios
+                .get('http://localhost:9000/api/positions')
+                .then(response => {
+                    commit('GET_TASKS_POSITIONS', response)
                 })
         },
 

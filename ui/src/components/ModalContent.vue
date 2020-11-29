@@ -11,7 +11,7 @@
                     {{ item.code }}
                 </a-select-option>
             </a-select>
-            <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskType">
+            <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro app-modal-content__micro-select" @click="getTaskType">
         </div>
         <div class="app-modal-content">
             <a-input
@@ -27,8 +27,8 @@
             <a-textarea
                 placeholder="Описание"
                 class="app-filter__input"
-                :value="taskArr.info"
-                v-model="taskArr.info"
+                :value="info"
+                v-model="info"
                 @onchange="getDescr(info)"
             />
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDescr">
@@ -46,41 +46,48 @@
                         {{ item.name }}
                     </a-select-option>
                 </a-select>
-                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskAssignee">
+                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro app-modal-content__micro-select" @click="getTaskAssignee">
             </div>
-            <div class="app-modal-content">
-                <a-input
-                    placeholder="Срок выполнения"
-                    class="app-filter__input app-modal-content__input"
-                    :value="dateTo"
-                    v-model="dateTo"
-                />
-                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDate">
-            </div>
-        </div>
-        <div style="display: flex; flex-direction: row; justify-content: space-between">
             <div class="app-modal-content" style="width: 200px">
                 <a-select
-                    placeholder="Важность"
-                    class="app-filter__input app-modal-content__input"
-                    :value="priority"
-                    v-model="priority"
-                    style="width: 100%"
+                        placeholder="Важность"
+                        class="app-filter__input app-modal-content__input"
+                        :value="priority"
+                        v-model="priority"
+                        style="width: 100%"
                 >
                     <a-select-option v-for="(item, i) in priorities" :key="item.id" :value="item.code || priority" @click="getAssignees(item.id)">
                         {{ item.code }}
                     </a-select-option>
                 </a-select>
-                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskPriority">
+                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro app-modal-content__micro-select" @click="getTaskPriority">
             </div>
-            <div class="app-modal-content">
+        </div>
+        <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div class="app-modal-content" style="width: 100%">
+                <a-select
+                        placeholder="Вид деятельности"
+                        class="app-filter__input app-modal-content__input"
+                        :value="position"
+                        v-model="position"
+                        style="width: 100%"
+                >
+                    <a-select-option v-for="(item, i) in positions" :key="item.id" :value="item.code || position" @click="getPositions(item.id)">
+                        {{ item.code }}
+                    </a-select-option>
+                </a-select>
+                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro app-modal-content__micro-select" @click="getTaskPosition">
+            </div>
+            <div class="app-modal-content" style="display: none">
                 <a-input
-                    placeholder="Вид деятельности"
-                    class="app-filter__input app-modal-content__input"
-                    :value="taskArr.taskPosition"
-                    v-model="taskArr.taskPosition"
+                        format="YYYY-MM-DD HH:mm"
+                        placeholder="Срок выполнения"
+                        class="app-filter__input app-modal-content__input"
+                        :value="dateTo"
+                        v-model="dateTo"
+                        @change="getData(dateTo)"
                 />
-                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskPosition">
+                <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDate">
             </div>
         </div>
         <div class="app-modal-content">
@@ -110,14 +117,22 @@
                 this.assignees.push(assignee);
             });
 
-            console.log(this.taskPriorities)
             this.taskPriorities.map(priority => {
                 this.priorities.push(priority);
+            });
+
+            this.taskPositions.map(position => {
+                this.positions.push(position);
             })
         },
         data() {
             return {
-                taskArr: {},
+                taskArr: {
+                    author: null,
+                    dateFact: null,
+                    dateTo: null,
+                    parent: null
+                },
                 type: null,
                 header: null,
                 info: null,
@@ -125,12 +140,14 @@
                 dateTo: null,
                 dateFact: null,
                 priority: null,
-                taskPosition: null,
+                position: null,
                 author: null,
                 taskTypes: this.$store.state.taskTypes,
                 taskUsers: this.$store.state.users,
                 taskPriorities: this.$store.state.taskPriority,
+                taskPositions: this.$store.state.positions,
                 priorities: [],
+                positions: [],
                 types: [],
                 assignees: []
             }
@@ -147,6 +164,12 @@
             },
             getAssignees(item) {
                 this.taskArr.assignee = item;
+            },
+            getData(item) {
+                this.taskArr.dateTo = item;
+            },
+            getPositions(item) {
+                this.taskArr.position = item;
             },
             getTaskType() {
                 recognizer.onresult = (event) => {
@@ -180,7 +203,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskArr.assignee = result[0].transcript;
+                        this.assignee = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -207,7 +230,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskArr.taskPosition = result[0].transcript;
+                        this.position = result[0].transcript;
                     }
                 };
                 recognizer.start();
