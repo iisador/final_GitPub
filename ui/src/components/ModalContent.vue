@@ -1,20 +1,25 @@
 <template>
     <div>
         <div class="app-modal-content">
-            <a-input
+            <a-select
                 placeholder="Тип задачи"
                 class="app-filter__input app-modal-content__input"
-                :value="taskArr.type"
-                v-model="taskArr.type"
-            />
+                v-model="type"
+                style="width: 100%"
+            >
+                <a-select-option v-for="(item, i) in types" :key="item.id" :value="item.code || type" @click="getTypes(item.id)">
+                    {{ item.code }}
+                </a-select-option>
+            </a-select>
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskType">
         </div>
         <div class="app-modal-content">
             <a-input
                 placeholder="Заголовок"
                 class="app-filter__input app-modal-content__input"
-                :value="taskArr.header"
-                v-model="taskArr.header"
+                :value="header"
+                v-model="header"
+                @change="getTitle(header)"
             />
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskTitle">
         </div>
@@ -24,37 +29,48 @@
                 class="app-filter__input"
                 :value="taskArr.info"
                 v-model="taskArr.info"
+                @onchange="getDescr(info)"
             />
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDescr">
         </div>
         <div style="display: flex; flex-direction: row; justify-content: space-between">
-            <div class="app-modal-content">
-                <a-input
+            <div class="app-modal-content" style="width: 200px">
+                <a-select
                     placeholder="Исполнитель"
                     class="app-filter__input app-modal-content__input"
-                    :value="taskArr.assignee"
-                    v-model="taskArr.assignee"
-                />
+                    :value="assignee"
+                    v-model="assignee"
+                    style="width: 100%"
+                >
+                    <a-select-option v-for="(item, i) in assignees" :key="item.id" :value="item.name || assignee" @click="getAssignees(item.id)">
+                        {{ item.name }}
+                    </a-select-option>
+                </a-select>
                 <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskAssignee">
             </div>
             <div class="app-modal-content">
                 <a-input
                     placeholder="Срок выполнения"
                     class="app-filter__input app-modal-content__input"
-                    :value="taskArr.dateTo"
-                    v-model="taskArr.dateTo"
+                    :value="dateTo"
+                    v-model="dateTo"
                 />
                 <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDate">
             </div>
         </div>
         <div style="display: flex; flex-direction: row; justify-content: space-between">
-            <div class="app-modal-content">
-                <a-input
+            <div class="app-modal-content" style="width: 200px">
+                <a-select
                     placeholder="Важность"
                     class="app-filter__input app-modal-content__input"
-                    :value="taskArr.priority"
-                    v-model="taskArr.priority"
-                />
+                    :value="priority"
+                    v-model="priority"
+                    style="width: 100%"
+                >
+                    <a-select-option v-for="(item, i) in priorities" :key="item.id" :value="item.code || priority" @click="getAssignees(item.id)">
+                        {{ item.code }}
+                    </a-select-option>
+                </a-select>
                 <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskPriority">
             </div>
             <div class="app-modal-content">
@@ -85,27 +101,58 @@
         mounted() {
             this.$store.dispatch('TASK_ARR', this.taskArr)
         },
+        created() {
+            this.taskTypes.map(type => {
+                this.types.push(type);
+            });
+
+            this.taskUsers.map(assignee => {
+                this.assignees.push(assignee);
+            });
+
+            console.log(this.taskPriorities)
+            this.taskPriorities.map(priority => {
+                this.priorities.push(priority);
+            })
+        },
         data() {
             return {
-                taskArr: {
-                    type: null,
-                    header: null,
-                    info: null,
-                    assignee: null,
-                    dateTo: null,
-                    dateFact: null,
-                    priority: null,
-                    taskPosition: null,
-                    author: null
-                }
+                taskArr: {},
+                type: null,
+                header: null,
+                info: null,
+                assignee: null,
+                dateTo: null,
+                dateFact: null,
+                priority: null,
+                taskPosition: null,
+                author: null,
+                taskTypes: this.$store.state.taskTypes,
+                taskUsers: this.$store.state.users,
+                taskPriorities: this.$store.state.taskPriority,
+                priorities: [],
+                types: [],
+                assignees: []
             }
         },
         methods: {
+            getTypes(item) {
+                this.taskArr.type = item;
+            },
+            getTitle(item) {
+                this.taskArr.header = item;
+            },
+            getDescr(item) {
+                this.taskArr.info = item;
+            },
+            getAssignees(item) {
+                this.taskArr.assignee = item;
+            },
             getTaskType() {
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskArr.type = result[0].transcript;
+                        this.type = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -114,7 +161,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskArr.header = result[0].transcript;
+                        this.header = result[0].transcript;
                         this.$store.dispatch('TASK_ARR', this.taskArr)
                     }
                 };
@@ -124,7 +171,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskArr.info = result[0].transcript;
+                        this.info = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -142,7 +189,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskArr.dateTo = result[0].transcript;
+                        this.dateTo = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -151,7 +198,7 @@
                 recognizer.onresult = (event) => {
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
-                        this.taskArr.priority = result[0].transcript;
+                        this.priority = result[0].transcript;
                     }
                 };
                 recognizer.start();
@@ -161,9 +208,6 @@
                     let result = event.results[event.resultIndex];
                     if (result.isFinal) {
                         this.taskArr.taskPosition = result[0].transcript;
-                        this.getTask({
-                            data: this.taskArr
-                        })
                     }
                 };
                 recognizer.start();

@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueCookies from "vue-cookies";
 
 Vue.use(Vuex);
+Vue.use(VueCookies)
 
 export default new Vuex.Store({
     state: {
@@ -9,7 +11,8 @@ export default new Vuex.Store({
         tasks: '',
         taskTypes: '',
         voice: '',
-        taskArr: ''
+        taskArr: '',
+        taskPriority: ''
     },
 
     mutations: {
@@ -22,7 +25,11 @@ export default new Vuex.Store({
         },
 
         GET_TASKS_TYPE(state, payload) {
-            state.taskTypes = payload.data.content;
+            state.taskTypes = payload.data;
+        },
+
+        GET_TASKS_PRIORITY(state, payload) {
+            state.taskPriority = payload.data;
         },
 
         TASK_ARR(state, payload) {
@@ -55,6 +62,14 @@ export default new Vuex.Store({
                 })
         },
 
+        GET_TASKS_PRIORITY: async ({commit}) => {
+            await axios
+                .get('http://localhost:9000/api/task/priorities')
+                .then(response => {
+                    commit('GET_TASKS_PRIORITY', response)
+                })
+        },
+
         TASK_ARR: function(store, payload) {
             store.commit('TASK_ARR', payload)
         },
@@ -67,6 +82,8 @@ export default new Vuex.Store({
     },
 
     getters: {
-
+        GET_TASKS_TYPE(state) {
+            return state.taskTypes;
+        },
     }
 })

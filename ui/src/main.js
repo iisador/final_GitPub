@@ -4,7 +4,7 @@ import store from './store'
 import './assets/scss/main.scss'
 import 'ant-design-vue/dist/antd.css';
 
-import { Card, Tag, Input, Button, Modal, Icon, Tabs } from 'ant-design-vue';
+import { Card, Tag, Input, Button, Modal, Icon, Tabs, Select } from 'ant-design-vue';
 Vue.use(Card);
 Vue.use(Tag);
 Vue.use(Input);
@@ -12,9 +12,10 @@ Vue.use(Button);
 Vue.use(Modal);
 Vue.use(Icon);
 Vue.use(Tabs);
+Vue.use(Select);
 
 window._ = require('lodash');
-window.axios = require('axios')
+window.axios = require('axios');
 
 Vue.config.productionTip = false;
 
