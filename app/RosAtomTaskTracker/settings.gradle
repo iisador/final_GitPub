@@ -1,0 +1,3 @@
+include ':app'
+include ':api'
+rootProject.name = "RosAtom Task Tracker"
