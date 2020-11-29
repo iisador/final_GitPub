@@ -132,7 +132,7 @@ insert into STATUSTYPE(id, code) values (1, 'В работе');
 insert into STATUSTYPE(id, code) values (2, 'Простаивает');
 insert into STATUSTYPE(id, code) values (3, 'Выполнено');
 insert into STATUSTYPE(id, code) values (4, 'Ознакомлен');
-insert into STATUSTYPE(id, code) values (5, 'Отказано');
+insert into STATUSTYPE(id, code) values (5, 'Отменена');
 
 create table reaction (
     id BIGINT primary key auto_increment,
