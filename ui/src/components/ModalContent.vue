@@ -29,7 +29,7 @@
                 class="app-filter__input"
                 :value="info"
                 v-model="info"
-                @onchange="getDescr(info)"
+                @change="getDescr(info)"
             />
             <img src="../assets/images/micro.svg" alt="" class="app-modal-content__micro" @click="getTaskDescr">
         </div>
@@ -128,7 +128,7 @@
         data() {
             return {
                 taskArr: {
-                    author: null,
+                    author: 0,
                     dateFact: null,
                     dateTo: null,
                     parent: null
