@@ -14,4 +14,5 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     password:
 #    url: jdbc:h2:file:./db;INIT=RUNSCRIPT FROM 'classpath:init.sql'
-    url: jdbc:h2:mem:db;INIT=RUNSCRIPT FROM 'classpath:init.sql'
+    url: jdbc:h2:file:./db
+#    url: jdbc:h2:mem:db;INIT=RUNSCRIPT FROM 'classpath:init.sql'

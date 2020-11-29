@@ -34,12 +34,14 @@ public class Comment implements Serializable {
     @Column
     private LocalDateTime tstmpCreate;
 
+    @Column
+    private Boolean closing;
+
     @PrePersist
     void onCreate() {
         tstmpCreate = LocalDateTime.now();
-        closing = false;
+        if (closing == null) {
+            closing = false;
+        }
     }
-
-    @Column
-    private Boolean closing;
 }

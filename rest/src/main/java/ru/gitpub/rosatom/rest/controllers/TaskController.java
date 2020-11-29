@@ -12,6 +12,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -191,6 +192,21 @@ public class TaskController {
             @RequestParam
                     Long statusId) {
         taskService.status(taskId, statusId);
+        return ResponseEntity.ok("OK");
+    }
+
+    @Operation(summary = "Изменить статус задачи",
+            tags = {"Задача"},
+            description = "Изменение статуса",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "ок не ок",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseEntity.class))))})
+    @DeleteMapping(value = "/api/tasks/{taskId}", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> deleteTask(
+            @Parameter(description = "Ид задачи", example = "1")
+            @PathVariable
+                    Long taskId) {
+        taskRepository.deleteById(taskId);
         return ResponseEntity.ok("OK");
     }
 }
