@@ -82,6 +82,7 @@ class SubmitTaskFragment : Fragment(R.layout.fragment_submit_task), DIAware {
             submit.setOnClickListener {
                 viewModel.submit(navArgs.taskId, commentText.text.toString())
             }
+            tlb.setNavigationOnClickListener { findNavController().popBackStack() }
         }
     }
 
