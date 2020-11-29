@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RosAtom Task Tracker</string>
+    <string name="caption_top_priority">Очень срочно</string>
+</resources>

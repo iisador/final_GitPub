@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/App.TextAppearance.Title.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Выставить верное значение для определения давления в баках" />
+
+        <TextView
+            android:id="@+id/status"
+            style="@style/App.TextAppearance.TaskBadge.Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/gray2"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="Ожидание" />
+
+        <TextView
+            android:id="@+id/type"
+            style="@style/App.TextAppearance.TaskBadge.Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            app:layout_constraintStart_toEndOf="@id/status"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="Технологическое" />
+
+        <TextView
+            android:id="@+id/priority"
+            style="@style/App.TextAppearance.TaskBadge.Priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:text="@string/caption_top_priority"
+            app:layout_constraintStart_toEndOf="@id/type"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/badges_barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="status,type,priority" />
+
+        <TextView
+            android:id="@+id/time_created"
+            style="@style/App.TextAppearance.TaskBadge.DateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/badges_barrier"
+            tools:text="10:41" />
+
+        <TextView
+            android:id="@+id/date_created"
+            style="@style/App.TextAppearance.TaskBadge.DateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@id/time_created"
+            app:layout_constraintTop_toBottomOf="@id/badges_barrier"
+            tools:text="27 Ноя 2020" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

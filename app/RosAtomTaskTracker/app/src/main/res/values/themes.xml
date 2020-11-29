@@ -1,0 +1,141 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.RosAtomTaskTracker" parent="App" />
+
+    <style name="App" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/black1_60</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="App.TextAppearance" />
+
+    <style name="App.TextAppearance.TabLayout">
+        <item name="android:textColor">@color/gray2</item>
+    </style>
+
+    <style name="App.TextAppearance.Body">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black1_80</item>
+    </style>
+
+    <style name="App.TextAppearance.Title">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black1</item>
+    </style>
+
+    <style name="App.TextAppearance.Title.Large">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black1</item>
+    </style>
+
+    <style name="App.TextAppearance.Title.Normal">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="App.TextAppearance.Title.Small">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="App.TextAppearance.Subtitle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="App.TextAppearance.Subtitle.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="App.TextAppearance.Subtitle.Tiny">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/black1_60</item>
+    </style>
+
+    <style name="App.TextAppearance.CommentDateTime">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black1_80</item>
+    </style>
+
+
+    <style name="App.TextAppearance.TaskBadge">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="App.TextAppearance.TaskBadge.Status">
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/background_task_status</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="App.TextAppearance.TaskBadge.Type">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black1_50</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="App.TextAppearance.TaskBadge.Priority">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="App.TextAppearance.TaskBadge.DateTime">
+        <item name="android:textColor">@color/black1_80</item>
+    </style>
+
+    <style name="App.TextAppearance.Button">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="App.Input">
+        <item name="android:background">@drawable/background_input</item>
+    </style>
+
+    <style name="App.Input.Comment">
+        <item name="android:inputType">textMultiLine</item>
+    </style>
+
+    <style name="App.Button" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textAppearance">@style/App.TextAppearance.Button</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@drawable/background_button</item>
+    </style>
+
+    <style name="App.Button.Primary">
+        <item name="android:backgroundTint">@color/blue</item>
+        <item name="backgroundTint">@color/blue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="App.Button.Applied">
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="backgroundTint">@color/green</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="App.Button.Dimmed">
+        <item name="android:backgroundTint">@color/gray5_10</item>
+        <item name="backgroundTint">@color/gray5_10</item>
+        <item name="android:textColor">@color/gray1</item>
+    </style>
+
+</resources>
