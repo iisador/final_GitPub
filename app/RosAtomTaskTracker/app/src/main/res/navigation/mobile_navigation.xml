@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.gitpub.rosatomtasktracker.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_taskPageFragment"
+            app:destination="@id/taskPageFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskPageFragment"
+        android:name="com.gitpub.rosatomtasktracker.ui.main.taskpage.TaskPageFragment"
+        android:label="fragment_task_page"
+        tools:layout="@layout/fragment_task_page">
+        <argument
+            android:name="taskId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_taskPageFragment_to_submitTaskFragment"
+            app:destination="@id/submitTaskFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/submitTaskFragment"
+        android:name="com.gitpub.rosatomtasktracker.ui.main.submittask.SubmitTaskFragment"
+        android:label="SubmitTaskFragment"
+        tools:layout="@layout/fragment_submit_task">
+        <argument
+            android:name="taskId"
+            app:argType="long" />
+    </fragment>
+
+</navigation>

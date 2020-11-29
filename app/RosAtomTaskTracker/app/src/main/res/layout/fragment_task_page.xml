@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:context=".ui.main.taskpage.TaskPageFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="Назад" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/container_divider"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/App.TextAppearance.Title.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Выставить верное значение для определения давления в баках" />
+
+            <TextView
+                android:id="@+id/status"
+                style="@style/App.TextAppearance.TaskBadge.Status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/gray2"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="6dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="Ожидание" />
+
+            <TextView
+                android:id="@+id/type"
+                style="@style/App.TextAppearance.TaskBadge.Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="6dp"
+                app:layout_constraintStart_toEndOf="@id/status"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="Технологическое" />
+
+            <TextView
+                android:id="@+id/priority"
+                style="@style/App.TextAppearance.TaskBadge.Priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="6dp"
+                android:text="@string/caption_top_priority"
+                app:layout_constraintStart_toEndOf="@id/type"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/badges_barrier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="status,type,priority" />
+
+            <TextView
+                android:id="@+id/time_created"
+                style="@style/App.TextAppearance.TaskBadge.DateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/badges_barrier"
+                tools:text="10:41" />
+
+            <TextView
+                android:id="@+id/date_created"
+                style="@style/App.TextAppearance.TaskBadge.DateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/time_created"
+                app:layout_constraintTop_toBottomOf="@id/badges_barrier"
+                tools:text="27 Ноя 2020" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/basic_task_info_barrier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="time_created,date_created" />
+
+            <View
+                android:id="@+id/center_vertical_guideline"
+                android:layout_width="16dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/executive_title"
+                style="@style/App.TextAppearance.Subtitle.Tiny"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Исполнитель"
+                app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/basic_task_info_barrier" />
+
+            <TextView
+                android:id="@+id/priority_title"
+                style="@style/App.TextAppearance.Subtitle.Tiny"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Важность"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@id/basic_task_info_barrier" />
+
+            <TextView
+                android:id="@+id/executive_text"
+                style="@style/App.TextAppearance.Title.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/executive_title"
+                tools:text="Толян Толян Толян Толян Толян Толян Толян Толян Толян Толян" />
+
+            <TextView
+                android:id="@+id/priority_text"
+                style="@style/App.TextAppearance.Title.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@id/priority_title"
+                tools:text="Пиздец" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/executive_n_priority_barrier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="executive_text,priority_text" />
+
+            <TextView
+                android:id="@+id/activity_title"
+                style="@style/App.TextAppearance.Subtitle.Tiny"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Вид деятельности"
+                app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/executive_n_priority_barrier" />
+
+            <TextView
+                android:id="@+id/due_date_title"
+                style="@style/App.TextAppearance.Subtitle.Tiny"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Срок выполнения"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@id/executive_n_priority_barrier" />
+
+            <TextView
+                android:id="@+id/activity_text"
+                style="@style/App.TextAppearance.Title.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Общая"
+                app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_title" />
+
+            <TextView
+                android:id="@+id/due_date_text"
+                style="@style/App.TextAppearance.Title.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@id/due_date_title"
+                tools:text="Вчера нахуй" />
+
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/activity_n_due_date_barrier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="activity_text,due_date_text" />
+
+            <TextView
+                android:id="@+id/task_info"
+                style="@style/App.TextAppearance.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/activity_n_due_date_barrier"
+                tools:text="Не следует однако забывать" />
+
+            <HorizontalScrollView
+                android:id="@+id/attachments_scroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/task_info">
+
+                <LinearLayout
+                    android:id="@+id/attachments_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal" />
+
+            </HorizontalScrollView>
+
+            <View
+                android:id="@+id/task_page_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/gray4"
+                app:layout_constraintTop_toBottomOf="@id/attachments_scroll" />
+
+            <TextView
+                android:id="@+id/comments_title"
+                style="@style/App.TextAppearance.Subtitle.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Комментарии"
+                app:layout_constraintTop_toBottomOf="@id/task_page_divider" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comments_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/comments_title"
+                tools:itemCount="1"
+                tools:listitem="@layout/view_task_comment" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/comment_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginTop="12dp"
+                android:hint="Комментарий"
+                app:boxBackgroundColor="@color/gray5_10"
+                app:boxCornerRadiusBottomEnd="4dp"
+                app:boxCornerRadiusBottomStart="4dp"
+                app:boxCornerRadiusTopEnd="4dp"
+                app:boxCornerRadiusTopStart="4dp"
+                app:endIconDrawable="@drawable/ic_mic"
+                app:endIconMode="custom"
+                app:endIconTint="@color/blue"
+                app:layout_constraintTop_toBottomOf="@id/comments_container">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/comment_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textMultiLine"
+                    android:textSize="14sp"
+                    tools:text="@tools:sample/lorem" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/send_comment"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Отправить"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/comment_input_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <View
+        android:id="@+id/container_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray2"
+        app:layout_constraintBottom_toTopOf="@id/controls_container" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/readdress_task"
+            style="@style/App.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Переадресовать"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_task"
+            style="@style/App.Button.Dimmed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Отклонить"
+            app:layout_constraintEnd_toStartOf="@id/submit_task"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/readdress_task" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit_task"
+            style="@style/App.Button.Applied"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Сдать"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cancel_task"
+            app:layout_constraintTop_toBottomOf="@id/readdress_task" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
