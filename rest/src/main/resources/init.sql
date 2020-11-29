@@ -5,10 +5,10 @@ create table POSITION (
 insert into position(id, code) values (0, 'Начальник цеха');
 insert into position(id, code) values (1, 'Мастер');
 insert into position(id, code) values (2, 'Старший мастер');
-insert into position(id, code) values (3, 'Магистр черной магии');
-insert into position(id, code) values (4, 'Повелитель метлы');
-insert into position(id, code) values (5, 'Фрезеровщик с тремя пальцами');
-insert into position(id, code) values (6, 'Фрезеровщик с четырьмя пальцами');
+insert into position(id, code) values (3, 'Зам. мастера');
+insert into position(id, code) values (4, 'Технолог');
+insert into position(id, code) values (5, 'Фрезеровщик');
+insert into position(id, code) values (6, 'Фрезеровщик I разряда');
 insert into position(id, code) values (7, 'Рабочий');
 
 create table user (
@@ -216,7 +216,7 @@ create table Task (
     reaction_id bigint
 );
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
-1, 0, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать велосипед', 'Создать велик. Разбить задачи на подзадачи', 1, 0, 0);
+1, 0, 10, PARSEDATETIME('29.11.2020 00:00:00','dd.MM.yyyy hh:mm:ss','en'), null, 0, 'Осмотреть фрезеровальный станок', 'осмотреть фрезеровальный станок 6Т13 на предмет износа', 1, 0, 0);
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, parent_id) values (
 2, 0, 100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 10, 'Создание подзадач для рабочих', 'Будет создано 13 задач', 1, 1);
 
@@ -229,6 +229,17 @@ insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header,
 insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, parent_id, reaction_id, priority_id) values (
 6, 2, 111, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 11, 'Создать башню', 'там то и там то', 3, 1, 3);
 
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
+7, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать мопед', 'без руля, чтоб силой мысли управлять можно было', 3, 0, 0);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
+10, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать самокат', 'С одним колесом и мотором', 3, 0, 0);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
+8, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать лодку', 'С веслами и всем таким вот', 2, 0, 0);
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
+9, 0, 11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Собрать атом водорода', 'Собрать атом водорода из протонов и нейтронов', 4, 0, 0);
+
+insert into Task (id, type_id, assignee_id, dateTo, dateFact, author_id, header, info, priority_id, group_id, reaction_id) values (
+11, 0, 13, PARSEDATETIME('29.11.2020 00:00:00','dd.MM.yyyy hh:mm:ss','en'), null, 0, 'Заполнить журнал техники безопасности', 'заполнить журнал ТБ за смену', 3, 0, 0);
 create table comment (
         id BIGINT primary key auto_increment,
         task_id bigint not null,
@@ -237,17 +248,20 @@ create table comment (
         tstmpCreate timestamp default CURRENT_TIMESTAMP,
         closing boolean default false
 );
-insert into comment(task_id, author_id, content) values (1, 10, 'так точно!');
+insert into comment(id, task_id, author_id, content) values (1, 1, 10, 'так точно!');
 
 create table attachment (
         id BIGINT primary key auto_increment,
-        task_id bigint not null,
+        task_id bigint,
         tstmpCreate TIMESTAMP default CURRENT_TIMESTAMP,
         author_id bigint,
         name varchar(150),
-        content blob
+        content blob,
+        url varchar(1500),
+        comment_id bigint
 );
-insert into attachment(task_id, author_id, name, content) values (1, 10, 'картинка.png', '032348762039847629837603874602');
+insert into attachment(task_id, author_id, name, content, url) values (1, 10, 'картинка.png', '032348762039847629837603874602', 'https://img5.lalafo.com/i/posters/original/3e/c6/aa50cf11f4b04cbf4790cee7169f.jpeg');
+insert into attachment(comment_id, author_id, name, content, url) values (1, 10, 'картинка.png', '032348762039847629837603874602', 'https://img5.lalafo.com/i/posters/original/3e/c6/aa50cf11f4b04cbf4790cee7169f.jpeg');
 
 create table userhousing (
     id BIGINT primary key auto_increment,

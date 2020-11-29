@@ -1,10 +1,13 @@
 package ru.gitpub.rosatom.services;
 
 import org.springframework.stereotype.Service;
+import ru.gitpub.rosatom.domain.entities.Attachment;
 import ru.gitpub.rosatom.domain.entities.Comment;
 import ru.gitpub.rosatom.domain.entities.Reaction;
 import ru.gitpub.rosatom.domain.entities.StatusType;
 import ru.gitpub.rosatom.domain.entities.Task;
+import ru.gitpub.rosatom.domain.entities.User;
+import ru.gitpub.rosatom.domain.repos.AttachmentRepository;
 import ru.gitpub.rosatom.domain.repos.CommentRepository;
 import ru.gitpub.rosatom.domain.repos.PriorityRepository;
 import ru.gitpub.rosatom.domain.repos.ReactionRepository;
@@ -36,13 +39,16 @@ public class TaskService {
 
     private final ReactionRepository reactionRepository;
 
+    private final AttachmentRepository attachmentRepository;
+
     public TaskService(TaskRepository taskRepository,
             UserRepository userRepository,
             StatusTypeRepository statusTypeRepository,
             PriorityRepository priorityRepository,
             CommentRepository commentRepository,
             TaskTypeRepository taskTypeRepository,
-            ReactionRepository reactionRepository) {
+            ReactionRepository reactionRepository,
+            AttachmentRepository attachmentRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.statusTypeRepository = statusTypeRepository;
@@ -50,6 +56,7 @@ public class TaskService {
         this.commentRepository = commentRepository;
         this.taskTypeRepository = taskTypeRepository;
         this.reactionRepository = reactionRepository;
+        this.attachmentRepository = attachmentRepository;
     }
 
     public Long create(TaskResource r) {
@@ -89,14 +96,22 @@ public class TaskService {
     public Long comment(Long taskId, CommentResource commentResource) {
         taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Задача с ид " + taskId + " не найдена"));
-
+        User author = userRepository.findById(commentResource.getAuthorId())
+                .orElseThrow(() -> new RuntimeException("Пользователь с ид " + commentResource.getAuthorId() + " не найден"));
         Comment c = new Comment();
-        c.setAuthor(userRepository.findById(commentResource.getAuthorId())
-                .orElseThrow(() -> new RuntimeException("Пользователь с ид " + commentResource.getAuthorId() + " не найден")));
+        c.setAuthor(author);
         c.setContent(commentResource.getContent());
         c.setClosing(commentResource.getClosing());
         c.setTaskId(taskId);
-        return commentRepository.save(c).getId();
+        c = commentRepository.save(c);
+
+        if (commentResource.getUrl() != null) {
+            Comment finalC = c;
+            commentResource.getUrl().stream()
+                    .map(s -> new Attachment(author, finalC.getId(), s))
+                    .forEach(attachmentRepository::save);
+        }
+        return c.getId();
     }
 
     public void reaction(Long taskId, Long reactionId) {

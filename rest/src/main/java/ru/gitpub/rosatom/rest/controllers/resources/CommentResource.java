@@ -1,6 +1,7 @@
 package ru.gitpub.rosatom.rest.controllers.resources;
 
 import java.io.Serializable;
+import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -18,4 +19,7 @@ public class CommentResource implements Serializable {
 
     @ApiModelProperty(value = "Признак закрывающего комментария")
     private Boolean closing;
+
+    @ApiModelProperty(value = "Урлы для аттачмента")
+    private List<String> url;
 }

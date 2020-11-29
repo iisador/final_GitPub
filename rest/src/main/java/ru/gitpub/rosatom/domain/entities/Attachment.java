@@ -27,6 +27,9 @@ public class Attachment implements Serializable {
     @Column(name = "task_id")
     private Long taskId;
 
+    @Column(name = "comment_id")
+    private Long commentId;
+
     @Column
     private String name;
 
@@ -39,4 +42,16 @@ public class Attachment implements Serializable {
 
     @OneToOne
     private User author;
+
+    @Column
+    private String url;
+
+    public Attachment() {
+    }
+
+    public Attachment(User author, Long commentId, String url) {
+        this.author = author;
+        this.commentId = commentId;
+        this.url = url;
+    }
 }
